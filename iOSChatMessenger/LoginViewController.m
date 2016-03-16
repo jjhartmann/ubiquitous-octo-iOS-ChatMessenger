@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "ChatClientSingleton.h"
 
 @interface LoginViewController ()
 
@@ -47,11 +48,21 @@
     
     // TODO: Call client and send block with weak ref to self. Check that username is unique.
     self.user = user;
+    ChatClientSingleton *client = [ChatClientSingleton getClientInstance];
     
-    
-    // Call Split view controller and segue.
-    [self performSegueWithIdentifier:@"LoginSegue" sender:self];
-    
+    // Create user if available
+    if ([client createUserAccount:self.user])
+    {
+        // Call Split view controller and segue.
+        [self performSegueWithIdentifier:@"LoginSegue" sender:self];
+    }
+    else
+    {
+        // Indeicate the user name is not available
+        [self.errorLabel setText:@"Username is unavailable"];
+        self.errorLabel.hidden = NO;
+        return;
+    }
 }
 
 /// Dismiss first responder for Text Field
