@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "MasterViewController.h"
+#import "DetailViewController.h"
 
 @interface LoginViewController ()
 
@@ -66,12 +67,29 @@
     if ([segue.identifier isEqualToString:@"LoginSegue"])
     {
         // Call Split view controller.
-        UINavigationController *navController = segue.destinationViewController;
-        MasterViewController *destController = (MasterViewController *) navController.topViewController;
+        UISplitViewController *splitViewController = (UISplitViewController *)segue.destinationViewController;
+        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        
+        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+        splitViewController.delegate = self;
+        
+        
+        UINavigationController *navigationControllerMaster = [splitViewController.viewControllers firstObject];
+        MasterViewController* destController = (MasterViewController *) navigationControllerMaster.topViewController;
         destController.username = self.user;
     }
     
     
+}
+
+#pragma mark - Split view
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
+    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
+        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end

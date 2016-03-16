@@ -28,6 +28,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
+    
+    // Set the title in chat group view
+    self.navigationItem.title = [[NSString alloc] initWithFormat:@"%@'s Chats", self.username];
     [super viewWillAppear:animated];
 }
 
