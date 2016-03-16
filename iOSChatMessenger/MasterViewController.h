@@ -11,7 +11,7 @@
 @class DetailViewController;
 
 @interface MasterViewController : UITableViewController
-
+@property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
 
