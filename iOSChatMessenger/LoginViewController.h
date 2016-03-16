@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
 - (IBAction)loginBtnPressed:(id)sender;
+
+- (void)didTapOnView;
 @end
