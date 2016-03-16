@@ -7,6 +7,10 @@
 //
 
 #import "ChatClientSingleton.h"
+#include <CoreFoundation/CoreFoundation.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+
 
 @implementation ChatClientSingleton
 #pragma mark Static Instance
@@ -32,6 +36,7 @@ static ChatClientSingleton *instance = nil;
     if (self)
     {
         // Set up client server connection
+        
     }
     
     return self;
