@@ -10,7 +10,7 @@
 
 @protocol ChatClientDelegate;
 
-@interface ChatClientSingleton : NSObject
+@interface ChatClientSingleton : NSObject <NSStreamDelegate>
 // Static Methods
 + (id) getClientInstance;
 
