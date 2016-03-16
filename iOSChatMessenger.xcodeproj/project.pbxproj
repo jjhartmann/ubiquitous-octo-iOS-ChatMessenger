@@ -16,6 +16,7 @@
 		77D5B5E81C9943AC004AC755 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D5B5E61C9943AC004AC755 /* LaunchScreen.storyboard */; };
 		77D5B5F31C9943AC004AC755 /* iOSChatMessengerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B5F21C9943AC004AC755 /* iOSChatMessengerTests.m */; };
 		77D5B5FE1C9943AC004AC755 /* iOSChatMessengerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B5FD1C9943AC004AC755 /* iOSChatMessengerUITests.m */; };
+		77D5B60D1C99D69C004AC755 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B60C1C99D69C004AC755 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		77D5B5F91C9943AC004AC755 /* iOSChatMessengerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSChatMessengerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77D5B5FD1C9943AC004AC755 /* iOSChatMessengerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSChatMessengerUITests.m; sourceTree = "<group>"; };
 		77D5B5FF1C9943AD004AC755 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77D5B60B1C99D69C004AC755 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		77D5B60C1C99D69C004AC755 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				77D5B5DE1C9943AC004AC755 /* DetailViewController.h */,
 				77D5B5DF1C9943AC004AC755 /* DetailViewController.m */,
 				77D5B5E11C9943AC004AC755 /* Main.storyboard */,
+				77D5B60B1C99D69C004AC755 /* LoginViewController.h */,
+				77D5B60C1C99D69C004AC755 /* LoginViewController.m */,
 				77D5B5E41C9943AC004AC755 /* Assets.xcassets */,
 				77D5B5E61C9943AC004AC755 /* LaunchScreen.storyboard */,
 				77D5B5E91C9943AC004AC755 /* Info.plist */,
@@ -282,6 +287,7 @@
 				77D5B5DD1C9943AC004AC755 /* MasterViewController.m in Sources */,
 				77D5B5D71C9943AC004AC755 /* main.m in Sources */,
 				77D5B5E01C9943AC004AC755 /* DetailViewController.m in Sources */,
+				77D5B60D1C99D69C004AC755 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
