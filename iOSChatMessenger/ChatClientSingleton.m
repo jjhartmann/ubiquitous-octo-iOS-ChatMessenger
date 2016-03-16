@@ -61,9 +61,11 @@ static ChatClientSingleton *instance = nil;
 - (BOOL)createUserAccount:(NSString *)username
 {
     // Send an iam:<username> request to the server.
+    NSString *message = [[NSString alloc] initWithFormat:@"iam:%@", username];
+    NSData *oData = [[NSData alloc] initWithData:[message dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.oStream write:[oData bytes] maxLength:[oData length]];
     
-    
-    return NO;
+    return YES;
 }
 
 
