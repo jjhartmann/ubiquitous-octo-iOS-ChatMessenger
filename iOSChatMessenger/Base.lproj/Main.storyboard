@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Master-->
@@ -68,9 +69,46 @@
                     <view key="view" contentMode="scaleToFill" id="fec-FG-onx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGH-R2-Qus">
+                                <rect key="frame" x="20" y="254" width="560" height="37"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="29"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginBtnPressed:" destination="Od8-V5-Nqn" eventType="touchUpInside" id="Jss-c7-Ub4"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6JW-JI-ueU">
+                                <rect key="frame" x="20" y="203" width="560" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="mqi-dO-Clq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvY-xl-XmT">
+                                <rect key="frame" x="20" y="235" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wvY-xl-XmT" firstAttribute="leading" secondItem="fec-FG-onx" secondAttribute="leadingMargin" id="H9y-5t-saJ"/>
+                            <constraint firstItem="wvY-xl-XmT" firstAttribute="top" secondItem="6JW-JI-ueU" secondAttribute="bottom" constant="2" id="LPf-CT-t2Z"/>
+                            <constraint firstItem="6JW-JI-ueU" firstAttribute="top" secondItem="CwC-9G-uTi" secondAttribute="bottom" constant="183" id="Lcq-hw-6q8"/>
+                            <constraint firstItem="XGH-R2-Qus" firstAttribute="leading" secondItem="fec-FG-onx" secondAttribute="leadingMargin" id="SZx-Jr-ihP"/>
+                            <constraint firstItem="XGH-R2-Qus" firstAttribute="top" secondItem="6JW-JI-ueU" secondAttribute="bottom" constant="21" id="k0t-dP-BtU"/>
+                            <constraint firstItem="XGH-R2-Qus" firstAttribute="trailing" secondItem="fec-FG-onx" secondAttribute="trailingMargin" id="ru5-dT-USP"/>
+                            <constraint firstItem="6JW-JI-ueU" firstAttribute="leading" secondItem="fec-FG-onx" secondAttribute="leadingMargin" id="upt-Ta-dIv"/>
+                            <constraint firstItem="6JW-JI-ueU" firstAttribute="trailing" secondItem="fec-FG-onx" secondAttribute="trailingMargin" id="zRU-FG-fKO"/>
+                            <constraint firstItem="wvY-xl-XmT" firstAttribute="trailing" secondItem="fec-FG-onx" secondAttribute="trailingMargin" id="zWp-g4-N2o"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="errorLabel" destination="wvY-xl-XmT" id="h9u-ZM-RXe"/>
+                        <outlet property="usernameField" destination="6JW-JI-ueU" id="Oqs-dd-lTC"/>
                         <segue destination="H1p-Uh-vWS" kind="show" id="iHm-qp-qQe"/>
                     </connections>
                 </viewController>
