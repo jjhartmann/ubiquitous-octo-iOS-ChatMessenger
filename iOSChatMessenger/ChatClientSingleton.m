@@ -44,6 +44,14 @@ static ChatClientSingleton *instance = nil;
         self.iStream = (__bridge_transfer NSInputStream *)readStream;
         self.oStream = (__bridge_transfer NSOutputStream * )writeStream;
         
+        [self.iStream setDelegate:self];
+        [self.oStream setDelegate:self];
+        
+        [self.iStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.oStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        
+        [self.iStream open];
+        [self.oStream open];
     }
     
     return self;
