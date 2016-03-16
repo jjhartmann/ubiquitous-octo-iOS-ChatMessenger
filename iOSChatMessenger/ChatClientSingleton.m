@@ -37,6 +37,12 @@ static ChatClientSingleton *instance = nil;
     return self;
 }
 
-
-
+/// Create the user accound on server. Returns YES is success
+- (BOOL)createUserAccount:(NSString *)username
+{
+    // Send an iam:<username> request to the server.
+    
+    
+    
+}
 @end
