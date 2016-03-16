@@ -14,7 +14,12 @@ static ChatClientSingleton *instance = nil;
 
 + (id)getClientInstanceWithUser:(NSString *)username
 {
+    if (!instance)
+    {
+        instance = [[ChatClientSingleton alloc] initWithUsername:username];
+    }
     
+    return instance;
 }
 
 // Instance Methods
