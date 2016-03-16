@@ -17,6 +17,7 @@
 		77D5B5F31C9943AC004AC755 /* iOSChatMessengerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B5F21C9943AC004AC755 /* iOSChatMessengerTests.m */; };
 		77D5B5FE1C9943AC004AC755 /* iOSChatMessengerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B5FD1C9943AC004AC755 /* iOSChatMessengerUITests.m */; };
 		77D5B60D1C99D69C004AC755 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B60C1C99D69C004AC755 /* LoginViewController.m */; };
+		77D5B6101C9A0AA6004AC755 /* ChatClientSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B60F1C9A0AA6004AC755 /* ChatClientSingleton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		77D5B5FF1C9943AD004AC755 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77D5B60B1C99D69C004AC755 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		77D5B60C1C99D69C004AC755 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		77D5B60E1C9A0AA6004AC755 /* ChatClientSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatClientSingleton.h; sourceTree = "<group>"; };
+		77D5B60F1C9A0AA6004AC755 /* ChatClientSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatClientSingleton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,8 @@
 				77D5B5E11C9943AC004AC755 /* Main.storyboard */,
 				77D5B60B1C99D69C004AC755 /* LoginViewController.h */,
 				77D5B60C1C99D69C004AC755 /* LoginViewController.m */,
+				77D5B60E1C9A0AA6004AC755 /* ChatClientSingleton.h */,
+				77D5B60F1C9A0AA6004AC755 /* ChatClientSingleton.m */,
 				77D5B5E41C9943AC004AC755 /* Assets.xcassets */,
 				77D5B5E61C9943AC004AC755 /* LaunchScreen.storyboard */,
 				77D5B5E91C9943AC004AC755 /* Info.plist */,
@@ -283,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77D5B6101C9A0AA6004AC755 /* ChatClientSingleton.m in Sources */,
 				77D5B5DA1C9943AC004AC755 /* AppDelegate.m in Sources */,
 				77D5B5DD1C9943AC004AC755 /* MasterViewController.m in Sources */,
 				77D5B5D71C9943AC004AC755 /* main.m in Sources */,
