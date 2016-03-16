@@ -8,10 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol ChatClientDelegate;
+
 @interface ChatClientSingleton : NSObject
 // Static Methods
 + (id) getClientInstanceWithUser:(NSString *)username;
 
+// Instance Vars
+@property (strong, nonatomic) NSInputStream *iStream;
+@property (strong, nonatomic) NSOutputStream *oStream;
+@property (weak, nonatomic) id <ChatClientDelegate> delegate;
+
 // Instance Methods
 - (id) initWithUsername:(NSString *)username;
+@end
+
+
+@protocol ChatClientDelegate <NSObject>
+
+- (void)messageRevievedFromServer:(NSString *)message;
+
 @end
