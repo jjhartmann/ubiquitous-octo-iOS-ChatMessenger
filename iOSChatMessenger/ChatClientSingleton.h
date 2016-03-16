@@ -12,7 +12,7 @@
 
 @interface ChatClientSingleton : NSObject
 // Static Methods
-+ (id) getClientInstanceWithUser:(NSString *)username;
++ (id) getClientInstance;
 
 // Instance Vars
 @property (strong, nonatomic) NSInputStream *iStream;
@@ -20,7 +20,8 @@
 @property (weak, nonatomic) id <ChatClientDelegate> delegate;
 
 // Instance Methods
-- (id) initWithUsername:(NSString *)username;
+- (id) init;
+- (BOOL)createUserAccount:(NSString *)username;
 @end
 
 
