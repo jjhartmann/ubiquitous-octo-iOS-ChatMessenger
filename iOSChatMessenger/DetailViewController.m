@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
+@property NSMutableArray *objects;
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;
 - (void)moveViewsUp:(BOOL)up keyboardRect:(CGRect)rect;
@@ -46,13 +47,16 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
     
-    // Add gesture recognizer for keyboard
     // Create and add gesture recognizer
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
     [self.view addGestureRecognizer:tap];
     
     self.messageField.delegate = self;
     
+    if (!self.objects)
+    {
+        self.objects = [[NSMutableArray alloc] init];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,7 +97,10 @@
 
 - (void)addGroupMessageToView:(NSString *)username message:(NSString *)message
 {
-    
+    // Add message to object
+    NSArray *cellObj = [NSArray arrayWithObjects:username, message, nil];
+    [self.objects addObject:cellObj];
+    [self.tableView reloadData];
 }
 
 #pragma mark keyboard listeners
@@ -169,9 +176,9 @@
 {
     // Resign responder and send message.
     [self.messageField resignFirstResponder];
-    self.messageField.text = @"";
-    
     [self sendMessageToGroup];
+    
+    self.messageField.text = @"";
     return YES;
 }
 
@@ -184,7 +191,41 @@
     // Parse Commands Here.
     if ([command[0] isEqualToString:@"msg"])
     {
-        
+        [self addGroupMessageToView:command[1] message:command[2]];
+    }
+}
+
+
+#pragma mark - Table View
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.objects.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    NSArray *object = self.objects[indexPath.row];
+    cell.textLabel.text = object[1];
+    cell.detailTextLabel.text = object[2];
+    return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.objects removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
 
