@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SenderTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageBubble;
+@property (weak, nonatomic) IBOutlet UIImageView *messageStatusImg;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 
 @end
