@@ -81,6 +81,7 @@
         // Indeicate the user name is not available
         [self.errorLabel setText:@"Username is unavailable"];
         self.errorLabel.hidden = NO;
+        [self unfreezeUI];
     }
 }
 
