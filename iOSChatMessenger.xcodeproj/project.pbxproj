@@ -18,6 +18,8 @@
 		77D5B5FE1C9943AC004AC755 /* iOSChatMessengerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B5FD1C9943AC004AC755 /* iOSChatMessengerUITests.m */; };
 		77D5B60D1C99D69C004AC755 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B60C1C99D69C004AC755 /* LoginViewController.m */; };
 		77D5B6101C9A0AA6004AC755 /* ChatClientSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D5B60F1C9A0AA6004AC755 /* ChatClientSingleton.m */; };
+		77FF14641C9B314100619FAA /* SenderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FF14621C9B314100619FAA /* SenderTableViewCell.m */; };
+		77FF14651C9B314100619FAA /* SenderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FF14631C9B314100619FAA /* SenderTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,9 @@
 		77D5B60C1C99D69C004AC755 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		77D5B60E1C9A0AA6004AC755 /* ChatClientSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatClientSingleton.h; sourceTree = "<group>"; };
 		77D5B60F1C9A0AA6004AC755 /* ChatClientSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatClientSingleton.m; sourceTree = "<group>"; };
+		77FF14611C9B314100619FAA /* SenderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SenderTableViewCell.h; path = CustomCells/SenderTableViewCell.h; sourceTree = "<group>"; };
+		77FF14621C9B314100619FAA /* SenderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SenderTableViewCell.m; path = CustomCells/SenderTableViewCell.m; sourceTree = "<group>"; };
+		77FF14631C9B314100619FAA /* SenderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SenderTableViewCell.xib; path = CustomCells/SenderTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +130,7 @@
 				77D5B5E61C9943AC004AC755 /* LaunchScreen.storyboard */,
 				77D5B5E91C9943AC004AC755 /* Info.plist */,
 				77D5B5D51C9943AC004AC755 /* Supporting Files */,
+				77FF14661C9B31BD00619FAA /* CustomCells */,
 			);
 			path = iOSChatMessenger;
 			sourceTree = "<group>";
@@ -153,6 +159,16 @@
 				77D5B5FF1C9943AD004AC755 /* Info.plist */,
 			);
 			path = iOSChatMessengerUITests;
+			sourceTree = "<group>";
+		};
+		77FF14661C9B31BD00619FAA /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				77FF14611C9B314100619FAA /* SenderTableViewCell.h */,
+				77FF14621C9B314100619FAA /* SenderTableViewCell.m */,
+				77FF14631C9B314100619FAA /* SenderTableViewCell.xib */,
+			);
+			name = CustomCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77FF14651C9B314100619FAA /* SenderTableViewCell.xib in Resources */,
 				77D5B5E81C9943AC004AC755 /* LaunchScreen.storyboard in Resources */,
 				77D5B5E51C9943AC004AC755 /* Assets.xcassets in Resources */,
 				77D5B5E31C9943AC004AC755 /* Main.storyboard in Resources */,
@@ -288,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77FF14641C9B314100619FAA /* SenderTableViewCell.m in Sources */,
 				77D5B6101C9A0AA6004AC755 /* ChatClientSingleton.m in Sources */,
 				77D5B5DA1C9943AC004AC755 /* AppDelegate.m in Sources */,
 				77D5B5DD1C9943AC004AC755 /* MasterViewController.m in Sources */,
@@ -519,6 +537,7 @@
 				77D5B6041C9943AD004AC755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		77D5B6051C9943AD004AC755 /* Build configuration list for PBXNativeTarget "iOSChatMessengerTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +546,7 @@
 				77D5B6071C9943AD004AC755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		77D5B6081C9943AD004AC755 /* Build configuration list for PBXNativeTarget "iOSChatMessengerUITests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +555,7 @@
 				77D5B60A1C9943AD004AC755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
