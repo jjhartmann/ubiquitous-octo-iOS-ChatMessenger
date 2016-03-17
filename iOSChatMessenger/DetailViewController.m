@@ -35,7 +35,7 @@
     // Update the user interface for the detail item.
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
-        self.groupID = [self.detailItem description];
+        self.groupID = [[self.detailItem description] lowercaseString];
     }
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
@@ -169,6 +169,8 @@
 {
     // Resign responder and send message.
     [self.messageField resignFirstResponder];
+    self.messageField.text = @"";
+    
     [self sendMessageToGroup];
     return YES;
 }

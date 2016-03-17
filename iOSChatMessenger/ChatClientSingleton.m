@@ -56,7 +56,7 @@ static ChatClientSingleton *instance = nil;
         CFWriteStreamRef writeStream;
         
         // Create connection to IP address 192.168.1.71
-        CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (CFStringRef) @"192.168.1.71", 12345, &readStream, &writeStream);
+        CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (CFStringRef) @"192.168.1.71", 12354, &readStream, &writeStream);
         self.iStream = (__bridge_transfer NSInputStream *)readStream;
         self.oStream = (__bridge_transfer NSOutputStream * )writeStream;
         
@@ -182,6 +182,7 @@ static ChatClientSingleton *instance = nil;
         case NSStreamEventEndEncountered: // End of stream
         {
             NSLog(@"StreamHandle: NSStreamEventEndEncountered");
+            
             break;
         }
         case NSStreamEventErrorOccurred: // Error in Stream
