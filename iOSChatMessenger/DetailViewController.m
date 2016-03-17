@@ -51,6 +51,8 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
     [self.view addGestureRecognizer:tap];
     
+    self.messageField.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,7 +81,14 @@
 #pragma mark message control
 - (void)sendMessageToGroup
 {
+    if ([self.messageField.text length] == 0)
+    {
+        NSLog(@"Message field empty. Return");
+        return;
+    }
+    
     NSString *message = [NSString stringWithFormat:@"sndgrp:%@:%@", self.groupID, self.messageField.text];
+    [self.clientStream sendStringCommand:message];
 }
 
 - (void)addGroupMessageToView:(NSString *)username message:(NSString *)message
@@ -160,8 +169,7 @@
 {
     // Resign responder and send message.
     [self.messageField resignFirstResponder];
-    
-    
+    [self sendMessageToGroup];
     return YES;
 }
 
