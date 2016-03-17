@@ -138,6 +138,12 @@ static ChatClientSingleton *instance = nil;
     // Call method to parse buffer
     [self.iBuffer setLength:bufLen + bytesRead];
     [self parseBuffer];
+    
+    if (bytesRead > 0)
+    {
+        // Reset the ibuffer
+        [self.iBuffer replaceBytesInRange:NSMakeRange(0, bytesRead) withBytes:NULL length:0];
+    }
 }
 
 
