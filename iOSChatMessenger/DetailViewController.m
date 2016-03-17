@@ -7,6 +7,8 @@
 //
 
 #import "DetailViewController.h"
+#import "CustomCells/SenderTableViewCell.h"
+#import "ReceiverTableViewCell.h"
 
 @interface DetailViewController ()
 @property NSMutableArray *objects;
@@ -14,7 +16,7 @@
 - (void)keyboardWillHide:(NSNotification *)notification;
 - (void)moveViewsUp:(BOOL)up keyboardRect:(CGRect)rect;
 - (void)sendMessageToGroup;
-- (void)addGroupMessageToView:(NSString *)username message:(NSString *)message;
+- (void)addGroupMessageToView:(NSString *)username message:(NSString *)message sender:(BOOL)isSender;
 - (void)didTapOnView;
 // recieve
 @end
@@ -177,7 +179,7 @@
     // Resign responder and send message.
     [self.messageField resignFirstResponder];
     [self sendMessageToGroup];
-    [self addGroupMessageToView:@"me" message:self.messageField.text];
+    [self addGroupMessageToView:@"me" message:self.messageField.text sender:YES];
     
     self.messageField.text = @"";
     return YES;
@@ -192,7 +194,7 @@
     // Parse Commands Here.
     if ([command[0] isEqualToString:@"msg"])
     {
-        [self addGroupMessageToView:command[1] message:command[2]];
+        [self addGroupMessageToView:command[1] message:command[2] sender:NO];
     }
 }
 
@@ -211,8 +213,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     NSArray *object = self.objects[indexPath.row];
-    cell.textLabel.text = object[0];
-    cell.detailTextLabel.text = object[1];
+    
+    
+    
+    
+    
+    
+    
     return cell;
 }
 
