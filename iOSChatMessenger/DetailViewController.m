@@ -13,8 +13,9 @@
 - (void)keyboardWillHide:(NSNotification *)notification;
 - (void)moveViewsUp:(BOOL)up keyboardRect:(CGRect)rect;
 - (void)sendMessageToGroup;
+- (void)addGroupMessageToView:(NSString *)username message:(NSString *)message;
 - (void)didTapOnView;
-
+// recieve
 @end
 
 @implementation DetailViewController
@@ -79,6 +80,11 @@
 - (void)sendMessageToGroup
 {
     NSString *message = [NSString stringWithFormat:@"sndgrp:%@:%@", self.groupID, self.messageField.text];
+}
+
+- (void)addGroupMessageToView:(NSString *)username message:(NSString *)message
+{
+    
 }
 
 #pragma mark keyboard listeners
@@ -159,5 +165,17 @@
     return YES;
 }
 
+#pragma mark -
+#pragma mark Chat Delegate Methods
+- (void)receiveMessageFromServer:(NSString *)message
+{
+    NSArray *command = [message componentsSeparatedByString:@":"];
+    
+    // Parse Commands Here.
+    if ([command[0] isEqualToString:@"msg"])
+    {
+        
+    }
+}
 
 @end

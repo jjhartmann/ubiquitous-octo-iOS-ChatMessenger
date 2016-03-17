@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ChatClientSingleton.h"
 
-@interface DetailViewController : UIViewController <UITextFieldDelegate>
+@interface DetailViewController : UIViewController <UITextFieldDelegate , ChatClientDelegate>
 
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
