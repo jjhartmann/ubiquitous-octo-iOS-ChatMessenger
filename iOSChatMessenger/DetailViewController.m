@@ -12,6 +12,7 @@
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;
 - (void)moveViewsUp:(BOOL)up keyboardRect:(CGRect)rect;
+- (void)sendMessageToGroup;
 - (void)didTapOnView;
 
 @end
@@ -33,6 +34,7 @@
     // Update the user interface for the detail item.
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
+        self.groupID = [self.detailItem description];
     }
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
@@ -71,6 +73,12 @@
     // Remove the keyboard observers.
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark message control
+- (void)sendMessageToGroup
+{
+    NSString *message = [NSString stringWithFormat:@"sndgrp:%@:%@", self.groupID, self.messageField.text];
 }
 
 #pragma mark keyboard listeners
@@ -139,6 +147,16 @@
 - (void)didTapOnView
 {
     [self.messageField resignFirstResponder];
+}
+
+#pragma mark UITextField Delegate Methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // Resign responder and send message.
+    [self.messageField resignFirstResponder];
+    
+    
+    return YES;
 }
 
 

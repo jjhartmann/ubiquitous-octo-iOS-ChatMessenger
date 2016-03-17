@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChatClientSingleton.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <UITextFieldDelegate>
 
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *messageField;
+@property (strong, nonatomic) NSString *groupID;
+@property (weak, nonatomic) ChatClientSingleton *clientStream;
 
 @end
 
