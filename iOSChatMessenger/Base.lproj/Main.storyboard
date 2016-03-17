@@ -110,7 +110,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activitySpinner" destination="ihj-Aw-bZi" id="Y3H-S5-Z3p"/>
                         <outlet property="errorLabel" destination="wvY-xl-XmT" id="h9u-ZM-RXe"/>
+                        <outlet property="loginBtn" destination="XGH-R2-Qus" id="w6C-0U-ST3"/>
                         <outlet property="usernameField" destination="6JW-JI-ueU" id="Oqs-dd-lTC"/>
                         <segue destination="H1p-Uh-vWS" kind="show" identifier="LoginSegue" id="iHm-qp-qQe"/>
                     </connections>

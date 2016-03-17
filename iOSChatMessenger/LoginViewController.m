@@ -54,6 +54,7 @@
     
     // Create user if available
     [client createUserAccount:self.user];
+    [self freezeUI];
 }
 
 /// Dismiss first responder for Text Field
@@ -82,13 +83,19 @@
 /// Freeze the UI from user interaction and start activity indicator
 - (void)freezeUI
 {
-    
+    self.usernameField.userInteractionEnabled = NO;
+    self.loginBtn.userInteractionEnabled = NO;
+    self.activitySpinner.hidden = NO;
+    [self.activitySpinner startAnimating];
 }
 
 /// Unfreeze UI and stop activity indicator
 - (void)unfreezeUI
 {
-    
+    self.usernameField.userInteractionEnabled = YES;
+    self.loginBtn.userInteractionEnabled = YES;
+    self.activitySpinner.hidden = YES;
+    [self.activitySpinner stopAnimating];
 }
 
 #pragma mark -

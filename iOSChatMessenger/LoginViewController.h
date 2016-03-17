@@ -13,6 +13,8 @@
 @property (strong, nonatomic) NSString *user;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitySpinner;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
 - (IBAction)loginBtnPressed:(id)sender;
 
