@@ -133,8 +133,6 @@
     NSValue *keyFrame = [info valueForKey:UIKeyboardFrameBeginUserInfoKey];
     CGRect rect = [keyFrame CGRectValue];
     
-    CGRect srec = self.view.frame;
-    
     if (self.view.frame.origin.y >= 0)
     {
         [self moveViewsUp:YES keyboardRect:rect];
