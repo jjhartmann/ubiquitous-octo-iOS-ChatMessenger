@@ -11,6 +11,14 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+@interface ChatClientSingleton ()
+@property (strong, readwrite, nonatomic) NSMutableData *iBuffer;
+@property (strong, readwrite, nonatomic) NSMutableData *oBuffer;
+- (void)processInput;
+- (void)parseBuffer;
+
+
+@end
 
 @implementation ChatClientSingleton
 #pragma mark Static Instance
