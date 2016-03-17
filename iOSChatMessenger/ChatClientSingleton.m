@@ -84,6 +84,13 @@ static ChatClientSingleton *instance = nil;
     return YES;
 }
 
+/// Send string command to the server
+- (void)sendStringCommand:(NSString *)command
+{
+    NSData *oData = [[NSData alloc] initWithData:[command dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.oStream write:[oData bytes] maxLength:[oData length]];
+}
+
 /// Parse the buffer after revieing message from server
 - (void)parseBuffer
 {

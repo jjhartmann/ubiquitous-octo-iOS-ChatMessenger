@@ -22,6 +22,7 @@
 // Instance Methods
 - (id) init;
 - (BOOL)createUserAccount:(NSString *)username;
+- (void)sendStringCommand:(NSString *)command;
 @end
 
 
