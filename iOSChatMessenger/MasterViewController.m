@@ -93,4 +93,13 @@
     }
 }
 
+#pragma mark -
+#pragma mark Chat Delegate Methods
+- (void)receiveMessageFromServer:(NSString *)message
+{
+    NSArray *command = [message componentsSeparatedByString:@":"];
+    
+    // Parse Commands Here. 
+}
+
 @end
