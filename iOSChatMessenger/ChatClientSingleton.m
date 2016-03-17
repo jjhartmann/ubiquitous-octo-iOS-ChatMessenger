@@ -84,6 +84,11 @@ static ChatClientSingleton *instance = nil;
     return YES;
 }
 
+/// Parse the buffer after revieing message from server
+- (void)parseBuffer
+{
+    
+}
 
 /// Process the input and extract data from stream
 - (void)processInput
