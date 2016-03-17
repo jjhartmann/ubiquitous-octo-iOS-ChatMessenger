@@ -100,7 +100,7 @@
 
 #pragma mark -
 #pragma mark Chat Delegate Methods
-- (void)revieveMessageFromServer:(NSString *)message
+- (void)receiveMessageFromServer:(NSString *)message
 {
     NSArray *command = [message componentsSeparatedByString:@":"];
     if ([command[0] isEqualToString:@"addusercb"])

@@ -27,5 +27,5 @@
 
 @protocol ChatClientDelegate <NSObject>
 @optional
-- (void)revieveMessageFromServer:(NSString *)message;
+- (void)receiveMessageFromServer:(NSString *)message;
 @end

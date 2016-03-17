@@ -87,7 +87,19 @@ static ChatClientSingleton *instance = nil;
 /// Parse the buffer after revieing message from server
 - (void)parseBuffer
 {
+    // Convert Data into UTF8 char set
+    NSString *inputString = [[NSString alloc] initWithBytes:[self.iBuffer bytes] length:[self.iBuffer length] encoding:NSUTF8StringEncoding];
+    NSScanner *scanner = [[NSScanner alloc] initWithString:inputString];
     
+    // Remove any control characters
+    NSString *command;
+    BOOL res = [scanner scanCharactersFromSet:[NSCharacterSet alphanumericCharacterSet] intoString:&command];
+    
+    // Call delegate to handle command
+    if (res && [self.delegate respondsToSelector:@selector(receiveMessageFromServer:)])
+    {
+        [self.delegate receiveMessageFromServer:command];
+    }
 }
 
 /// Process the input and extract data from stream
@@ -143,6 +155,7 @@ static ChatClientSingleton *instance = nil;
         case NSStreamEventHasBytesAvailable: // Read from stream
         {
             NSLog(@"StreamHandle: NSStreamEventHasBytesAvailable");
+            [self processInput];
             break;
         }
         case NSStreamEventHasSpaceAvailable: // Write to stream
