@@ -51,7 +51,7 @@
 
 - (void)insertNewObject:(id)sender {
     [self.objects insertObject:[NSDate date] atIndex:1];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

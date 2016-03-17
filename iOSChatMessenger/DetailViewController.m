@@ -52,6 +52,8 @@
     [self.view addGestureRecognizer:tap];
     
     self.messageField.delegate = self;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
     if (!self.objects)
     {
@@ -177,6 +179,7 @@
     // Resign responder and send message.
     [self.messageField resignFirstResponder];
     [self sendMessageToGroup];
+    [self addGroupMessageToView:@"me" message:self.messageField.text];
     
     self.messageField.text = @"";
     return YES;
@@ -210,8 +213,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     NSArray *object = self.objects[indexPath.row];
-    cell.textLabel.text = object[1];
-    cell.detailTextLabel.text = object[2];
+    cell.textLabel.text = object[0];
+    cell.detailTextLabel.text = object[1];
     return cell;
 }
 
