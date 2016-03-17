@@ -12,6 +12,8 @@
 
 @interface LoginViewController ()
 - (void)createUserCallback:(NSString *)message;
+- (void)freezeUI;
+- (void)unfreezeUI;
 @end
 
 @implementation LoginViewController
@@ -75,6 +77,18 @@
         [self.errorLabel setText:@"Username is unavailable"];
         self.errorLabel.hidden = NO;
     }
+}
+
+/// Freeze the UI from user interaction and start activity indicator
+- (void)freezeUI
+{
+    
+}
+
+/// Unfreeze UI and stop activity indicator
+- (void)unfreezeUI
+{
+    
 }
 
 #pragma mark -
