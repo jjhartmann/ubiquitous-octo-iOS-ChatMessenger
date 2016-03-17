@@ -9,10 +9,10 @@
 #import "LoginViewController.h"
 #import "MasterViewController.h"
 #import "DetailViewController.h"
-#import "ChatClientSingleton.h"
 
 @interface LoginViewController ()
-
+- (void)parseServerData:
+- (void)createUserCallback:(NSString *)message;
 @end
 
 @implementation LoginViewController
@@ -49,9 +49,23 @@
     // TODO: Call client and send block with weak ref to self. Check that username is unique.
     self.user = user;
     ChatClientSingleton *client = [ChatClientSingleton getClientInstance];
+    client.delegate = self;
     
     // Create user if available
-    if ([client createUserAccount:self.user])
+    [client createUserAccount:self.user];
+}
+
+/// Dismiss first responder for Text Field
+- (void)didTapOnView
+{
+    [self.usernameField resignFirstResponder];
+}
+
+/// Create user callback when server responds.
+- (void)createUserCallback:(NSString *)message
+{
+    // Create user if available
+    if ([message isEqualToString:@"YES"])
     {
         // Call Split view controller and segue.
         [self performSegueWithIdentifier:@"LoginSegue" sender:self];
@@ -61,15 +75,20 @@
         // Indeicate the user name is not available
         [self.errorLabel setText:@"Username is unavailable"];
         self.errorLabel.hidden = NO;
-        return;
     }
 }
 
-/// Dismiss first responder for Text Field
-- (void)didTapOnView
+#pragma mark -
+#pragma mark Chat Delegate Methods
+- (void)revieveMessageFromServer:(NSString *)message
 {
-    [self.usernameField resignFirstResponder];
+    NSArray *command = [message componentsSeparatedByString:@":"];
+    if ([command[0] isEqualToString:@"addusercb"])
+    {
+        [self createUserCallback:command[1]];
+    }
 }
+
 
 #pragma mark Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
