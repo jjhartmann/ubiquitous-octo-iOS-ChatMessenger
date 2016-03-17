@@ -12,6 +12,8 @@
 #include <netinet/in.h>
 
 @interface ChatClientSingleton ()
+@property NSInteger iBufferCapacity;
+@property NSInteger oBufferCapacity;
 @property (strong, readwrite, nonatomic) NSMutableData *iBuffer;
 @property (strong, readwrite, nonatomic) NSMutableData *oBuffer;
 - (void)processInput;
@@ -43,6 +45,12 @@ static ChatClientSingleton *instance = nil;
     self = [super init];
     if (self)
     {
+        // Set capacity of buffers
+        self.iBufferCapacity = 16*1024;
+        self.oBufferCapacity = 16*1024;
+        self.iBuffer = [NSMutableData dataWithCapacity:self.iBufferCapacity];
+        self.oBuffer = [NSMutableData dataWithCapacity:self.oBufferCapacity];
+        
         // Set up client server connection
         CFReadStreamRef readStream;
         CFWriteStreamRef writeStream;
@@ -77,6 +85,40 @@ static ChatClientSingleton *instance = nil;
 }
 
 
+/// Process the input and extract data from stream
+- (void)processInput
+{
+    NSInteger bytesRead;
+    NSInteger bufLen = [self.iBuffer length];
+    
+    
+    if (bufLen >= self.iBufferCapacity)
+    {
+        // The buffer is full
+        // TODO: Error handling
+        NSLog(@"Input Buffer Full");
+        return;
+    }
+    
+    // Set buffer to capacity
+    [self.iBuffer setLength:self.iBufferCapacity];
+    
+    // Retrieve bytes up to capacity minus what is already there.
+    bytesRead = [self.iStream read:[self.iBuffer mutableBytes] + bufLen maxLength:self.iBufferCapacity - bufLen];
+    
+    // Make sure bytes have been read into buffer
+    if (bytesRead <= 0)
+    {
+        // Bytes have not been read
+        // TODO: error handling
+        NSLog(@"no Bytes read in buffer. bytesRead: %i", bytesRead);
+        return;
+    }
+    
+    // Call method to parse buffer
+    [self.iBuffer setLength:bufLen + bytesRead];
+    [self parseBuffer];
+}
 
 
 #pragma mark - 
