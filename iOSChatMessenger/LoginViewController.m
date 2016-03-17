@@ -25,6 +25,10 @@
     // Create and add gesture recognizer
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
     [self.view addGestureRecognizer:tap];
+    
+    // UI elemnts
+    self.errorLabel.hidden = YES;
+    self.activitySpinner.hidden = YES;
 }
 
 
