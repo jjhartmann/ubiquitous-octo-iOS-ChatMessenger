@@ -89,12 +89,18 @@
                                     <action selector="loginBtnPressed:" destination="Od8-V5-Nqn" eventType="touchUpInside" id="Jss-c7-Ub4"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ihj-Aw-bZi">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6JW-JI-ueU" firstAttribute="centerY" secondItem="fec-FG-onx" secondAttribute="centerY" constant="-143" id="6ez-D7-XBA"/>
+                            <constraint firstItem="ihj-Aw-bZi" firstAttribute="centerX" secondItem="fec-FG-onx" secondAttribute="centerX" id="CGz-dg-Bct"/>
                             <constraint firstItem="wvY-xl-XmT" firstAttribute="leading" secondItem="fec-FG-onx" secondAttribute="leadingMargin" id="H9y-5t-saJ"/>
+                            <constraint firstItem="ihj-Aw-bZi" firstAttribute="centerY" secondItem="fec-FG-onx" secondAttribute="centerY" id="LPN-iM-eDc"/>
                             <constraint firstItem="wvY-xl-XmT" firstAttribute="top" secondItem="6JW-JI-ueU" secondAttribute="bottom" constant="2" id="LPf-CT-t2Z"/>
-                            <constraint firstItem="6JW-JI-ueU" firstAttribute="top" secondItem="CwC-9G-uTi" secondAttribute="bottom" constant="122" id="Lcq-hw-6q8"/>
                             <constraint firstItem="XGH-R2-Qus" firstAttribute="leading" secondItem="fec-FG-onx" secondAttribute="leadingMargin" id="SZx-Jr-ihP"/>
                             <constraint firstItem="XGH-R2-Qus" firstAttribute="top" secondItem="6JW-JI-ueU" secondAttribute="bottom" constant="2" id="k0t-dP-BtU"/>
                             <constraint firstItem="XGH-R2-Qus" firstAttribute="trailing" secondItem="fec-FG-onx" secondAttribute="trailingMargin" id="ru5-dT-USP"/>
