@@ -69,6 +69,8 @@ static ChatClientSingleton *instance = nil;
 }
 
 
+
+
 #pragma mark - 
 #pragma mark NSStream Delegete
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode

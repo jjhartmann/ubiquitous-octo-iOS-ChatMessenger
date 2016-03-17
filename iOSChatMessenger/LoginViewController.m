@@ -11,7 +11,6 @@
 #import "DetailViewController.h"
 
 @interface LoginViewController ()
-- (void)parseServerData:
 - (void)createUserCallback:(NSString *)message;
 @end
 
