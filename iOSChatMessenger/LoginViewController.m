@@ -58,6 +58,7 @@
     
     // Create user if available
     [client createUserAccount:self.user];
+    self.clientStream = client;
     [self freezeUI];
 }
 
@@ -132,6 +133,11 @@
         UINavigationController *navigationControllerMaster = [splitViewController.viewControllers firstObject];
         MasterViewController* destController = (MasterViewController *) navigationControllerMaster.topViewController;
         destController.username = self.user;
+        
+        destController.clientStream = self.clientStream;
+        destController.clientStream.delegate = destController;
+        
+        
     }
     
     

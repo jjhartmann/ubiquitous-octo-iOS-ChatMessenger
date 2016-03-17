@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitySpinner;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (weak, nonatomic) ChatClientSingleton *clientStream;
 
 - (IBAction)loginBtnPressed:(id)sender;
 
