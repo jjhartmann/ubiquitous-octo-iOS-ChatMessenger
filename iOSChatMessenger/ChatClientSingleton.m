@@ -87,18 +87,21 @@ static ChatClientSingleton *instance = nil;
 /// Parse the buffer after revieing message from server
 - (void)parseBuffer
 {
-    // Convert Data into UTF8 char set
-    NSString *inputString = [[NSString alloc] initWithBytes:[self.iBuffer bytes] length:[self.iBuffer length] encoding:NSUTF8StringEncoding];
-    NSScanner *scanner = [[NSScanner alloc] initWithString:inputString];
+    NSInteger offset = 0;
+    const uint8_t *bytes = [self.iBuffer bytes];
     
-    // Remove any control characters
-    NSString *command;
-    BOOL res = [scanner scanCharactersFromSet:[NSCharacterSet alphanumericCharacterSet] intoString:&command];
+    // Convert Data into UTF8 char set
+    NSString *inputString = [[NSString alloc] initWithBytes:&bytes[offset] length:[self.iBuffer length] encoding:NSUTF8StringEncoding];
+    
+    // Remove CR LF
+    NSString *commandString;
+    NSScanner *scanner = [[NSScanner alloc] initWithString:inputString];
+    BOOL res = [scanner scanCharactersFromSet:[[NSCharacterSet controlCharacterSet] invertedSet] intoString:&commandString];
     
     // Call delegate to handle command
     if (res && [self.delegate respondsToSelector:@selector(receiveMessageFromServer:)])
     {
-        [self.delegate receiveMessageFromServer:command];
+        [self.delegate receiveMessageFromServer:commandString];
     }
 }
 
