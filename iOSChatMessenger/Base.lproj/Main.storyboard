@@ -40,11 +40,21 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6U6-YD-XDU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6U6-YD-XDU">
                                 <rect key="frame" x="0.0" y="64" width="600" height="490"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="9xe-yj-cMB">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9xe-yj-cMB" id="4i3-b9-kHZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kJN-mb-iRl">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kJN-mb-iRl">
                                 <rect key="frame" x="20" y="562" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -52,16 +62,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kJN-mb-iRl" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="AiA-R9-hME"/>
+                            <constraint firstItem="kJN-mb-iRl" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="Fgk-4F-lC9"/>
+                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="kJN-mb-iRl" secondAttribute="bottom" constant="8" id="Jq4-Qv-neQ"/>
+                            <constraint firstItem="6U6-YD-XDU" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="OGV-dE-3NQ"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
+                            <constraint firstItem="6U6-YD-XDU" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-20" id="YK7-y6-Pbi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6U6-YD-XDU" secondAttribute="trailing" constant="-20" id="ahJ-Mz-3tQ"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
                             <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
+                            <constraint firstItem="kJN-mb-iRl" firstAttribute="top" secondItem="6U6-YD-XDU" secondAttribute="bottom" constant="8" id="thI-fG-tXl"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
-                        <outlet property="messageFeild" destination="kJN-mb-iRl" id="ggd-NJ-26H"/>
+                        <outlet property="messageField" destination="kJN-mb-iRl" id="odg-Tx-yrN"/>
                         <outlet property="tableView" destination="6U6-YD-XDU" id="mHC-0e-5IV"/>
                     </connections>
                 </viewController>

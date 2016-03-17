@@ -9,6 +9,10 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
+- (void)keyboardWillShow:(NSNotification *)notification;
+- (void)keyboardWillHide:(NSNotification *)notification;
+- (void)moveViewsUp:(BOOL)up keyboardRect:(CGRect)rect;
+- (void)didTapOnView;
 
 @end
 
@@ -38,11 +42,104 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    
+    // Add gesture recognizer for keyboard
+    // Create and add gesture recognizer
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
+    [self.view addGestureRecognizer:tap];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // Regester keyboard listeners
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // Remove the keyboard observers.
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark keyboard listeners
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    NSValue *keyFrame = [info valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect rect = [keyFrame CGRectValue];
+    
+    CGRect srec = self.view.frame;
+    
+    if (self.view.frame.origin.y >= 0)
+    {
+        [self moveViewsUp:YES keyboardRect:rect];
+    }
+    else if (self.view.frame.origin.y < 0)
+    {
+        [self moveViewsUp:NO keyboardRect:rect];
+    }
+    
+    srec = self.view.frame;
+}
+
+/// Callback from notification center
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    NSValue *keyFrame = [info valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect rect = [keyFrame CGRectValue];
+    
+    CGRect srec = self.view.frame;
+    
+    if (self.view.frame.origin.y >= 0)
+    {
+        [self moveViewsUp:YES keyboardRect:rect];
+    }
+    else if (self.view.frame.origin.y < 0)
+    {
+        [self moveViewsUp:NO keyboardRect:rect];
+    }
+}
+
+/// Move the frame up or down
+- (void)moveViewsUp:(BOOL)up keyboardRect:(CGRect)rect
+{
+    // Animate the view moving
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        CGRect srect = self.view.frame;
+        if (up)
+        {
+            // Move the view up
+            srect.origin.y = -(rect.size.height);
+        }
+        else
+        {
+            // Move rect to original pos
+            srect.origin.y = 0;
+        }
+        
+        self.view.frame = srect;
+    }];
+}
+
+/// Dismiss the keyboard view
+- (void)didTapOnView
+{
+    [self.messageField resignFirstResponder];
+}
+
 
 @end
