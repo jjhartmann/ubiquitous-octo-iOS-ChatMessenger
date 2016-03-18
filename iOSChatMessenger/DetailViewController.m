@@ -203,12 +203,24 @@
     [self.messageField resignFirstResponder];
 }
 
+#pragma mark UIGesture Recognizer Handle
 /// Detect and handle long table on table view cell
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
         {
+            CGPoint point = [gestureRecognizer locationInView:self.tableView];
+            NSIndexPath *index = [self.tableView indexPathForRowAtPoint:point];
+            if (index)
+            {
+                MessageObject *message = [self.objects objectAtIndex:index.row];
+                if (message.hasURL)
+                {
+                    // Display URL
+                    
+                }
+            }
             break;
         }
         case UIGestureRecognizerStateChanged:
@@ -217,6 +229,17 @@
         }
         case UIGestureRecognizerStateEnded:
         {
+            CGPoint point = [gestureRecognizer locationInView:self.tableView];
+            NSIndexPath *index = [self.tableView indexPathForRowAtPoint:point];
+            if (index)
+            {
+                MessageObject *message = [self.objects objectAtIndex:index.row];
+                if (message.hasURL)
+                {
+                    // HIDE URL
+                    
+                }
+            }
             break;
         }
         default:
