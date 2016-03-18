@@ -16,7 +16,7 @@
 @property NSInteger oBufferCapacity;
 @property (strong, readwrite, nonatomic) NSMutableData *iBuffer;
 @property (strong, readwrite, nonatomic) NSMutableData *oBuffer;
-- (void)configureSocketStreams:(NSString *)ipAddress portNumber:(NSInteger)port;
+- (BOOL)configureSocketStreams:(NSString *)ipAddress portNumber:(NSInteger)port statusCallback:(StreamStatus) statusBlock;
 - (void)processInput;
 - (void)parseBuffer;
 
@@ -39,11 +39,11 @@ static ChatClientSingleton *instance = nil;
 }
 
 /// Static instance to set up client with port and IP settings
-+ (id)getClientInstanceWithIP:(NSString *)ipAddress portNumber:(NSString *)portNumber
++ (id)getClientInstanceWithIP:(NSString *)ipAddress portNumber:(NSString *)portNumber statusCallback:(StreamStatus) statusBlock
 {
     if (!instance)
     {
-        instance = [[ChatClientSingleton alloc] initWithIPandPort:ipAddress portNumber:portNumber];
+        instance = [[ChatClientSingleton alloc] initWithIPandPort:ipAddress portNumber:portNumber statusCallback:statusBlock];
     }
     
     return instance;
@@ -58,27 +58,33 @@ static ChatClientSingleton *instance = nil;
     if (self)
     {
         // Create connection to IP address 192.168.1.71
-        [self configureSocketStreams:@"192.168.1.71" portNumber:12543];
+        if (![self configureSocketStreams:@"192.168.1.71" portNumber:12543 statusCallback:nil])
+        {
+            return nil;
+        }
     }
     
     return self;
 }
 
-- (id)initWithIPandPort:(NSString *)ipAddress portNumber:(NSString *)portNumber
+- (id)initWithIPandPort:(NSString *)ipAddress portNumber:(NSString *)portNumber statusCallback:(StreamStatus) statusBlock
 {
     NSInteger port = [portNumber integerValue];
     
     self = [super init];
     if (self)
     {
-        [self configureSocketStreams:ipAddress portNumber:port];
+        if (![self configureSocketStreams:ipAddress portNumber:port statusCallback:statusBlock])
+        {
+            return nil;
+        }
     }
     
     return self;
 }
 
 /// Setup and configure socket streams
-- (void)configureSocketStreams:(NSString *)ipAddress portNumber:(NSInteger)port
+- (BOOL)configureSocketStreams:(NSString *)ipAddress portNumber:(NSInteger)port statusCallback:(StreamStatus) statusBlock
 {
     // Set capacity of buffers
     self.iBufferCapacity = 16*1024;
@@ -92,6 +98,14 @@ static ChatClientSingleton *instance = nil;
     
     // Create connection to IP address 192.168.1.71
     CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (__bridge CFStringRef) ipAddress, port, &readStream, &writeStream);
+    
+    CFReadStreamSetProperty(readStream,
+                            kCFStreamPropertyShouldCloseNativeSocket,
+                            kCFBooleanTrue);
+    CFWriteStreamSetProperty(writeStream,
+                             kCFStreamPropertyShouldCloseNativeSocket,
+                             kCFBooleanTrue);
+    
     self.iStream = (__bridge_transfer NSInputStream *)readStream;
     self.oStream = (__bridge_transfer NSOutputStream * )writeStream;
     
@@ -103,6 +117,20 @@ static ChatClientSingleton *instance = nil;
     
     [self.iStream open];
     [self.oStream open];
+    
+    CFStreamStatus readStatus = CFReadStreamGetStatus(readStream);
+    CFStreamStatus writeStatus =  CFWriteStreamGetStatus(writeStream);
+    
+    // Check for errors, and notify delegate
+    if ((readStatus <= 0) || (writeStatus <= 0))
+    {
+        NSLog(@"Error occurced when creating the readWrite streams. \n\tRStatus: %li \n\tWStatus: %li", readStatus, writeStatus);
+        statusBlock(NO);
+        return NO;
+    }
+    
+    statusBlock(YES);
+    return YES;
 }
 
 /// Create the user accound on server. Returns YES is success

@@ -21,6 +21,5 @@
 @property (strong, nonatomic) NSString *portNumber;
 
 - (IBAction)loginBtnPressed:(id)sender;
-
 - (void)didTapOnView;
 @end

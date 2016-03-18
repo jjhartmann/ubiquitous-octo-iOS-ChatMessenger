@@ -11,9 +11,11 @@
 #import "DetailViewController.h"
 
 @interface LoginViewController ()
+@property BOOL serverStatus;
 - (void)createUserCallback:(NSString *)message;
 - (void)freezeUI;
 - (void)unfreezeUI;
+- (void)createUser;
 @end
 
 @implementation LoginViewController
@@ -55,14 +57,38 @@
         return;
     }
     
-    // TODO: Call client and send block with weak ref to self. Check that username is unique.
+    // TODO: Pass in block to client
     self.user = user;
-    ChatClientSingleton *client = [ChatClientSingleton getClientInstance];
-    client.delegate = self;
+    self.clientStream = [ChatClientSingleton
+                         getClientInstanceWithIP:self.ipAdress
+                         portNumber:self.portNumber
+                         statusCallback:^(BOOL status){
+                             if (status)
+                             {
+                                 self.serverStatus = YES;
+                                 self.errorLabel.hidden = YES;
+                             }
+                             else
+                             {
+                                 self.serverStatus = NO;
+                                 [self.errorLabel setText:@"Error connecting to server"];
+                                 self.errorLabel.hidden = NO;
+                             }
+                         }];
     
+    self.clientStream.delegate = self;
+    
+    if (self.serverStatus)
+    {
+        [self createUser];
+    }
+}
+
+/// Create User account when connected to server
+- (void)createUser
+{
     // Create user if available
-    [client createUserAccount:self.user];
-    self.clientStream = client;
+    [self.clientStream createUserAccount:self.user];
     [self freezeUI];
 }
 
@@ -119,7 +145,6 @@
     }
 }
 
-
 #pragma mark Settings Delegate Methods
 - (void)didChangePortandIP:(NSString *)ipAddress portNumber:(NSString *)portNumber
 {
@@ -152,6 +177,8 @@
         // Set up delegate for settings view.
         SettingsViewController *dest = [segue destinationViewController];
         dest.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        dest.ipAddressField.text = self.ipAdress;
+        dest.portNumberField.text = self.portNumber;
         dest.delegate = self;
     }
     
