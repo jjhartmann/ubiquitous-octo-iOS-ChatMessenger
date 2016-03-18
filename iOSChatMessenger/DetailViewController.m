@@ -55,6 +55,13 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
     [self.view addGestureRecognizer:tap];
     
+    // Create long press gesture for tableview
+    UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longTap.delegate = self;
+    longTap.minimumPressDuration = 2.0;
+    [self.tableView addGestureRecognizer:longTap];
+    
+    // Set delegates
     self.messageField.delegate = self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -66,6 +73,7 @@
     {
         self.objects = [[NSMutableArray alloc] init];
     }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -193,6 +201,27 @@
 - (void)didTapOnView
 {
     [self.messageField resignFirstResponder];
+}
+
+/// Detect and handle long table on table view cell
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    switch (gestureRecognizer.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            break;
+        }
+        case UIGestureRecognizerStateChanged:
+        {
+            break;
+        }
+        case UIGestureRecognizerStateEnded:
+        {
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark UITextField Delegate Methods
