@@ -132,8 +132,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if ([segue.identifier isEqualToString:@"LoginSegue"])
-    {
+    if ([segue.identifier isEqualToString:@"LoginSegue"]){
         // Call Split view controller.
         UISplitViewController *splitViewController = (UISplitViewController *)segue.destinationViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
@@ -148,8 +147,12 @@
         
         destController.clientStream = self.clientStream;
         destController.clientStream.delegate = destController;
-        
-        
+    }
+    else if ([segue.identifier isEqualToString:@"settingsViewSegue"]) {
+        // Set up delegate for settings view.
+        SettingsViewController *dest = [segue destinationViewController];
+        dest.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        dest.delegate = self;
     }
     
     

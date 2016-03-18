@@ -188,7 +188,9 @@
                                         <constraint firstItem="f0W-2N-WLg" firstAttribute="leading" secondItem="BPj-Pw-U8N" secondAttribute="leading" constant="8" id="vRu-yL-xPQ"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="light"/>
+                                <vibrancyEffect>
+                                    <blurEffect style="light"/>
+                                </vibrancyEffect>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
