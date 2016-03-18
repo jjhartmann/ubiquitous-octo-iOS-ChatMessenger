@@ -227,7 +227,7 @@
                                     <action selector="loginBtnPressed:" destination="Od8-V5-Nqn" eventType="touchUpInside" id="Jss-c7-Ub4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGl-p4-f9J">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGl-p4-f9J">
                                 <rect key="frame" x="546" y="32" width="22" height="22"/>
                                 <connections>
                                     <segue destination="00l-Nn-j6g" kind="presentation" id="UPk-9t-cxk"/>
@@ -245,6 +245,8 @@
                             <constraint firstItem="XGH-R2-Qus" firstAttribute="top" secondItem="6JW-JI-ueU" secondAttribute="bottom" constant="2" id="k0t-dP-BtU"/>
                             <constraint firstItem="XGH-R2-Qus" firstAttribute="trailing" secondItem="fec-FG-onx" secondAttribute="trailingMargin" id="ru5-dT-USP"/>
                             <constraint firstItem="6JW-JI-ueU" firstAttribute="leading" secondItem="fec-FG-onx" secondAttribute="leadingMargin" id="upt-Ta-dIv"/>
+                            <constraint firstItem="GGl-p4-f9J" firstAttribute="top" secondItem="CwC-9G-uTi" secondAttribute="bottom" constant="12" id="v0f-qx-Sdp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GGl-p4-f9J" secondAttribute="trailing" constant="12" id="w1Y-HB-hHZ"/>
                             <constraint firstItem="6JW-JI-ueU" firstAttribute="trailing" secondItem="fec-FG-onx" secondAttribute="trailingMargin" id="zRU-FG-fKO"/>
                             <constraint firstItem="wvY-xl-XmT" firstAttribute="trailing" secondItem="fec-FG-onx" secondAttribute="trailingMargin" id="zWp-g4-N2o"/>
                         </constraints>
