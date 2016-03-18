@@ -248,8 +248,9 @@ struct WebPreviewMemento {
         {
             if (_isWebPreviewActive.isActive)
             {
-
+                
                 [self.previewWebView stopLoading];
+                [self.previewWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
                 self.previewWebView.hidden = YES;
                 self.previewBlurWV.hidden = YES;
                 _isWebPreviewActive.isActive = NO;
