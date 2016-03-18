@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *messageField;
 @property (strong, nonatomic) NSString *groupID;
 @property (weak, nonatomic) ChatClientSingleton *clientStream;
+@property (weak, nonatomic) IBOutlet UIWebView *previewWebView;
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *previewBlurWV;
 
 @end
 

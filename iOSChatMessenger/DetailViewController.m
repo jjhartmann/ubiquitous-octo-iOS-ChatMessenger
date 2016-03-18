@@ -11,7 +11,14 @@
 #import "ReceiverTableViewCell.h"
 #import "MessageObject.h"
 
-@interface DetailViewController ()
+struct WebPreviewMemento {
+    BOOL isActive;
+    NSInteger row;
+};
+
+@interface DetailViewController (){
+    struct WebPreviewMemento _isWebPreviewActive;
+}
 @property NSMutableArray *objects;
 @property NSDataDetector *detector;
 - (void)keyboardWillShow:(NSNotification *)notification;
@@ -58,8 +65,14 @@
     // Create long press gesture for tableview
     UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     longTap.delegate = self;
-    longTap.minimumPressDuration = 2.0;
+    longTap.minimumPressDuration = 1.5;
     [self.tableView addGestureRecognizer:longTap];
+    
+    // Configure webview
+    self.previewWebView.scalesPageToFit = YES;
+    self.previewWebView.contentMode = UIViewContentModeScaleAspectFill;
+    _isWebPreviewActive.row = -1;
+    _isWebPreviewActive.isActive = NO;
     
     // Set delegates
     self.messageField.delegate = self;
@@ -218,7 +231,11 @@
                 if (message.hasURL)
                 {
                     // Display URL
-                    
+                    [self.previewWebView loadRequest:[NSURLRequest requestWithURL:message.url]];
+                    self.previewWebView.hidden = NO;
+                    self.previewBlurWV.hidden = NO;
+                    _isWebPreviewActive.isActive = YES;
+                    _isWebPreviewActive.row = index.row;
                 }
             }
             break;
@@ -229,16 +246,14 @@
         }
         case UIGestureRecognizerStateEnded:
         {
-            CGPoint point = [gestureRecognizer locationInView:self.tableView];
-            NSIndexPath *index = [self.tableView indexPathForRowAtPoint:point];
-            if (index)
+            if (_isWebPreviewActive.isActive)
             {
-                MessageObject *message = [self.objects objectAtIndex:index.row];
-                if (message.hasURL)
-                {
-                    // HIDE URL
-                    
-                }
+
+                [self.previewWebView stopLoading];
+                self.previewWebView.hidden = YES;
+                self.previewBlurWV.hidden = YES;
+                _isWebPreviewActive.isActive = NO;
+                _isWebPreviewActive.row = -1;
             }
             break;
         }

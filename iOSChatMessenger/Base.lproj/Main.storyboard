@@ -75,27 +75,43 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <webView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTi-UY-B1p" userLabel="PreviewWebView">
-                                <rect key="frame" x="115" y="64" width="385" height="461"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
+                            <visualEffectView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOJ-q0-fik">
+                                <rect key="frame" x="28" y="90" width="541" height="442"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="50m-vF-dqC">
+                                    <rect key="frame" x="0.0" y="0.0" width="541" height="442"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <webView userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uTi-UY-B1p" userLabel="PreviewWebView">
+                                            <rect key="frame" x="16" y="19" width="509" height="404"/>
+                                            <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                        </webView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="uTi-UY-B1p" secondAttribute="trailing" constant="16" id="9dZ-xs-eU6"/>
+                                        <constraint firstAttribute="bottom" secondItem="uTi-UY-B1p" secondAttribute="bottom" constant="19" id="HpL-pJ-4nM"/>
+                                        <constraint firstItem="uTi-UY-B1p" firstAttribute="top" secondItem="50m-vF-dqC" secondAttribute="top" constant="19" id="R3n-qQ-QPB"/>
+                                        <constraint firstItem="uTi-UY-B1p" firstAttribute="leading" secondItem="50m-vF-dqC" secondAttribute="leading" constant="16" id="baG-l2-7Ev"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kJN-mb-iRl" firstAttribute="top" secondItem="uTi-UY-B1p" secondAttribute="bottom" constant="37" id="3ay-kT-9j0"/>
                             <constraint firstItem="kJN-mb-iRl" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="AiA-R9-hME"/>
                             <constraint firstItem="kJN-mb-iRl" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="Fgk-4F-lC9"/>
+                            <constraint firstItem="zOJ-q0-fik" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" constant="-11" id="JJz-ET-fdf"/>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="kJN-mb-iRl" secondAttribute="bottom" constant="8" id="Jq4-Qv-neQ"/>
                             <constraint firstItem="6U6-YD-XDU" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="OGV-dE-3NQ"/>
-                            <constraint firstItem="uTi-UY-B1p" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="95" id="P7o-HC-CsS"/>
+                            <constraint firstItem="kJN-mb-iRl" firstAttribute="top" secondItem="zOJ-q0-fik" secondAttribute="bottom" constant="30" id="PbR-9j-xE9"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
                             <constraint firstItem="6U6-YD-XDU" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-20" id="YK7-y6-Pbi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6U6-YD-XDU" secondAttribute="trailing" constant="-20" id="ahJ-Mz-3tQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uTi-UY-B1p" secondAttribute="trailing" constant="80" id="fTR-8h-ndt"/>
+                            <constraint firstItem="zOJ-q0-fik" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="26" id="cm8-xL-6gH"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
-                            <constraint firstItem="uTi-UY-B1p" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="seB-Mz-tot"/>
                             <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
                             <constraint firstItem="kJN-mb-iRl" firstAttribute="top" secondItem="6U6-YD-XDU" secondAttribute="bottom" constant="8" id="thI-fG-tXl"/>
+                            <constraint firstItem="zOJ-q0-fik" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="8" id="zsy-gg-gOZ"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -103,6 +119,8 @@
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
                         <outlet property="messageField" destination="kJN-mb-iRl" id="odg-Tx-yrN"/>
+                        <outlet property="previewBlurWV" destination="zOJ-q0-fik" id="UBE-RJ-Omh"/>
+                        <outlet property="previewWebView" destination="uTi-UY-B1p" id="MYD-FT-aTA"/>
                         <outlet property="tableView" destination="6U6-YD-XDU" id="mHC-0e-5IV"/>
                     </connections>
                 </viewController>
