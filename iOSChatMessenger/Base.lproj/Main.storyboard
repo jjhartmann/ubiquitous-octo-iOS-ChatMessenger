@@ -76,21 +76,21 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <visualEffectView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOJ-q0-fik">
-                                <rect key="frame" x="28" y="90" width="541" height="442"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="490"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="50m-vF-dqC">
-                                    <rect key="frame" x="0.0" y="0.0" width="541" height="442"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="490"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <webView userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uTi-UY-B1p" userLabel="PreviewWebView">
-                                            <rect key="frame" x="16" y="19" width="509" height="404"/>
+                                            <rect key="frame" x="61" y="43" width="478" height="404"/>
                                             <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                         </webView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="uTi-UY-B1p" secondAttribute="trailing" constant="16" id="9dZ-xs-eU6"/>
-                                        <constraint firstAttribute="bottom" secondItem="uTi-UY-B1p" secondAttribute="bottom" constant="19" id="HpL-pJ-4nM"/>
-                                        <constraint firstItem="uTi-UY-B1p" firstAttribute="top" secondItem="50m-vF-dqC" secondAttribute="top" constant="19" id="R3n-qQ-QPB"/>
-                                        <constraint firstItem="uTi-UY-B1p" firstAttribute="leading" secondItem="50m-vF-dqC" secondAttribute="leading" constant="16" id="baG-l2-7Ev"/>
+                                        <constraint firstItem="uTi-UY-B1p" firstAttribute="top" secondItem="50m-vF-dqC" secondAttribute="top" constant="43" id="2RO-9Z-ICx"/>
+                                        <constraint firstAttribute="bottom" secondItem="uTi-UY-B1p" secondAttribute="bottom" constant="43" id="BBS-3d-j3b"/>
+                                        <constraint firstAttribute="trailing" secondItem="uTi-UY-B1p" secondAttribute="trailing" constant="61" id="DYl-AY-2Kg"/>
+                                        <constraint firstItem="uTi-UY-B1p" firstAttribute="leading" secondItem="50m-vF-dqC" secondAttribute="leading" constant="61" id="OYO-ra-LuF"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="light"/>
@@ -100,18 +100,18 @@
                         <constraints>
                             <constraint firstItem="kJN-mb-iRl" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="AiA-R9-hME"/>
                             <constraint firstItem="kJN-mb-iRl" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="Fgk-4F-lC9"/>
-                            <constraint firstItem="zOJ-q0-fik" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" constant="-11" id="JJz-ET-fdf"/>
+                            <constraint firstItem="zOJ-q0-fik" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" constant="20" id="JJz-ET-fdf"/>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="kJN-mb-iRl" secondAttribute="bottom" constant="8" id="Jq4-Qv-neQ"/>
                             <constraint firstItem="6U6-YD-XDU" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="OGV-dE-3NQ"/>
-                            <constraint firstItem="kJN-mb-iRl" firstAttribute="top" secondItem="zOJ-q0-fik" secondAttribute="bottom" constant="30" id="PbR-9j-xE9"/>
+                            <constraint firstItem="kJN-mb-iRl" firstAttribute="top" secondItem="zOJ-q0-fik" secondAttribute="bottom" constant="8" id="PbR-9j-xE9"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
                             <constraint firstItem="6U6-YD-XDU" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-20" id="YK7-y6-Pbi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6U6-YD-XDU" secondAttribute="trailing" constant="-20" id="ahJ-Mz-3tQ"/>
-                            <constraint firstItem="zOJ-q0-fik" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="26" id="cm8-xL-6gH"/>
+                            <constraint firstItem="zOJ-q0-fik" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="cm8-xL-6gH"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
                             <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
                             <constraint firstItem="kJN-mb-iRl" firstAttribute="top" secondItem="6U6-YD-XDU" secondAttribute="bottom" constant="8" id="thI-fG-tXl"/>
-                            <constraint firstItem="zOJ-q0-fik" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="8" id="zsy-gg-gOZ"/>
+                            <constraint firstItem="zOJ-q0-fik" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" constant="-20" id="zsy-gg-gOZ"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

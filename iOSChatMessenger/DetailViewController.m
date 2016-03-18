@@ -48,6 +48,7 @@ struct WebPreviewMemento {
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
         self.groupID = [[self.detailItem description] lowercaseString];
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ Group", self.groupID];
     }
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
