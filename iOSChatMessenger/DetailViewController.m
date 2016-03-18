@@ -21,6 +21,9 @@
 // recieve
 @end
 
+static CGFloat textMarginHorizontal = 15.0f;
+static CGFloat textMarginVertical = 7.5f;
+
 @implementation DetailViewController
 
 #pragma mark - Managing the detail item
@@ -99,10 +102,10 @@
     [self.clientStream sendStringCommand:message];
 }
 
-- (void)addGroupMessageToView:(NSString *)username message:(NSString *)message
+- (void)addGroupMessageToView:(NSString *)username message:(NSString *)message sender:(BOOL)isSender
 {
     // Add message to object
-    NSArray *cellObj = [NSArray arrayWithObjects:username, message, nil];
+    NSArray *cellObj = [NSArray arrayWithObjects:username, message, (isSender) ? @"YES" : @"NO", nil];
     [self.objects addObject:cellObj];
     [self.tableView reloadData];
 }
@@ -210,17 +213,35 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+
     
     NSArray *object = self.objects[indexPath.row];
+    NSString *isSender = object[2];
     
+    if ([isSender isEqualToString:@"YES"])
+    {
+        NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:@"SenderTableViewCell" owner:self options:0];
+        SenderTableViewCell *cell = nibArray[0];
+        
+        cell.messageLabel.text = object[1];
+        
+        NSDateFormatter *dateFromator = [[NSDateFormatter alloc] init];
+        [dateFromator for]
+        
+        cell.timestampLabel.text = [[[NSDateFormatter alloc] init] stringFromDate:[NSDate date]];
+        [cell.messageStatusImg setTintColor:[UIColor grayColor]];
+        
+        return cell;
+    }
+    else
+    {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        cell.textLabel.text = object[1];
+        cell.detailTextLabel.text = object[0];
+        return cell;
+    }
     
-    
-    
-    
-    
-    
-    return cell;
+    return nil;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
