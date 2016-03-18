@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddGroupViewController : UIViewController
+@protocol AddGroupDelegate;
+
+@interface AddGroupViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *groupTextField;
 
+@end
+
+
+@protocol AddGroupDelegate <NSObject>
+- (void)chatGroupStringCallback:(NSString *)groupString;
 @end
