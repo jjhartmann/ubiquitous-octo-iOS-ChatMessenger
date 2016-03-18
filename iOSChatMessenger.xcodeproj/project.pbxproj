@@ -23,6 +23,7 @@
 		77FF146F1C9B32C500619FAA /* ReceiverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FF146D1C9B32C500619FAA /* ReceiverTableViewCell.m */; };
 		77FF14701C9B32C500619FAA /* ReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FF146E1C9B32C500619FAA /* ReceiverTableViewCell.xib */; };
 		77FF14761C9BE58000619FAA /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FF14751C9BE58000619FAA /* AddGroupViewController.m */; };
+		77FF14791C9BF4F800619FAA /* MessageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FF14781C9BF4F800619FAA /* MessageObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,8 @@
 		77FF146E1C9B32C500619FAA /* ReceiverTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceiverTableViewCell.xib; sourceTree = "<group>"; };
 		77FF14741C9BE58000619FAA /* AddGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGroupViewController.h; sourceTree = "<group>"; };
 		77FF14751C9BE58000619FAA /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
+		77FF14771C9BF4F800619FAA /* MessageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageObject.h; sourceTree = "<group>"; };
+		77FF14781C9BF4F800619FAA /* MessageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,7 @@
 				77D5B5E91C9943AC004AC755 /* Info.plist */,
 				77D5B5D51C9943AC004AC755 /* Supporting Files */,
 				77FF14661C9B31BD00619FAA /* CustomCells */,
+				77FF147A1C9BF4FE00619FAA /* Data */,
 			);
 			path = iOSChatMessenger;
 			sourceTree = "<group>";
@@ -182,6 +186,15 @@
 				77FF146E1C9B32C500619FAA /* ReceiverTableViewCell.xib */,
 			);
 			name = CustomCells;
+			sourceTree = "<group>";
+		};
+		77FF147A1C9BF4FE00619FAA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				77FF14771C9BF4F800619FAA /* MessageObject.h */,
+				77FF14781C9BF4F800619FAA /* MessageObject.m */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77FF14791C9BF4F800619FAA /* MessageObject.m in Sources */,
 				77FF14641C9B314100619FAA /* SenderTableViewCell.m in Sources */,
 				77D5B6101C9A0AA6004AC755 /* ChatClientSingleton.m in Sources */,
 				77FF146F1C9B32C500619FAA /* ReceiverTableViewCell.m in Sources */,
