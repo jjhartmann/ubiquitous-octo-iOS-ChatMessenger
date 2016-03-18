@@ -128,10 +128,10 @@
             </objects>
             <point key="canvasLocation" x="709" y="129"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="WKd-mD-BSz">
             <objects>
-                <viewController id="00l-Nn-j6g" sceneMemberID="viewController">
+                <viewController id="00l-Nn-j6g" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VUx-Uv-Zxn"/>
                         <viewControllerLayoutGuide type="bottom" id="nZz-CB-KGa"/>
