@@ -120,6 +120,14 @@
 }
 
 
+#pragma mark Settings Delegate Methods
+- (void)didChangePortandIP:(NSString *)ipAddress portNumber:(NSString *)portNumber
+{
+    self.ipAdress = ipAddress;
+    self.portNumber = portNumber;
+}
+
+
 #pragma mark Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

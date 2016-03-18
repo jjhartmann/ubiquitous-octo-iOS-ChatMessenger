@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ChatClientSingleton.h"
+#import "SettingsViewController.h"
 
-@interface LoginViewController : UIViewController  <UISplitViewControllerDelegate, ChatClientDelegate>
+@interface LoginViewController : UIViewController  <UISplitViewControllerDelegate, ChatClientDelegate, SettingsViewDelegate>
 @property (strong, nonatomic) NSString *user;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
