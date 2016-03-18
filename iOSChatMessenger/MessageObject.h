@@ -17,6 +17,6 @@
 @property (strong, nonatomic) UIImage *profileImage;
 @property BOOL isSender;
 @property BOOL hasURL;
-@property (strong, nonatomic) NSString *extractedURL;
+@property (strong, nonatomic) NSURL *url;
 
 @end

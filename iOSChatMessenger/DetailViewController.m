@@ -13,6 +13,7 @@
 
 @interface DetailViewController ()
 @property NSMutableArray *objects;
+@property NSDataDetector *detector;
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;
 - (void)moveViewsUp:(BOOL)up keyboardRect:(CGRect)rect;
@@ -57,6 +58,9 @@
     self.messageField.delegate = self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    // Set deltector
+    self.detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
     
     if (!self.objects)
     {
@@ -107,6 +111,19 @@
     cellObj.messageBody = message;
     cellObj.usernameSender = username;
     cellObj.isSender = isSender;
+    
+    
+    // AUser NSData Detector to identify URLs
+    NSArray *matches = [self.detector matchesInString:message options:0 range:NSMakeRange(0, [message length])];
+    for (NSTextCheckingResult *match in matches)
+    {
+        if ([match resultType] == NSTextCheckingTypeLink)
+        {
+            cellObj.url = [match URL];
+            cellObj.hasURL = YES;
+            break;
+        }
+    }
     
     [self.objects addObject:cellObj];
     [self.tableView reloadData];
