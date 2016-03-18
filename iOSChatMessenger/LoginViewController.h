@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitySpinner;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) ChatClientSingleton *clientStream;
+@property (strong, nonatomic) NSString *ipAdress;
+@property (strong, nonatomic) NSString *portNumber;
 
 - (IBAction)loginBtnPressed:(id)sender;
 

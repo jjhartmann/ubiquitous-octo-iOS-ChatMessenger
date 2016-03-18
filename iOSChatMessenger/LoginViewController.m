@@ -29,6 +29,10 @@
     // UI elemnts
     self.errorLabel.hidden = YES;
     self.activitySpinner.hidden = YES;
+    
+    // Initial port and ip address
+    self.ipAdress = @"192.168.1.71";
+    self.portNumber = @"12543";
 }
 
 
