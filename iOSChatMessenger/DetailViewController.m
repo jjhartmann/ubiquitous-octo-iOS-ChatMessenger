@@ -214,7 +214,9 @@ static CGFloat textMarginVertical = 7.5f;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    
+    CGRect messageLabelRect = CGRectZero;
+    CGRect timeLabelRect = CGRectZero;
+    CGRect balloonImgRect = CGRectZero;
     
     NSArray *object = self.objects[indexPath.row];
     NSString *isSender = object[2];
@@ -237,7 +239,19 @@ static CGFloat textMarginVertical = 7.5f;
         [cell.messageStatusImg setTintColor:[UIColor grayColor]];
         
         // Create frames
+        balloonImgRect = CGRectMake(self.view.frame.size.width - (MAX(cell.messageLabel.frame.size.width,cell.timestampLabel.frame.size.width+20) + 2*textMarginHorizontal), 0.0f, MAX(cell.messageLabel.frame.size.width,cell.timestampLabel.frame.size.width+20) + 2*textMarginHorizontal, cell.messageLabel.frame.size.height + cell.timestampLabel.frame.size.height + 8 + 2*textMarginVertical);
         
+        messageLabelRect = CGRectMake(self.view.frame.size.width - (cell.messageLabel.frame.size.width + textMarginHorizontal),  balloonImgRect.origin.y + textMarginVertical, cell.messageLabel.frame.size.width, cell.messageLabel.frame.size.height);
+        
+        timeLabelRect = CGRectMake(self.view.frame.size.width - cell.timestampLabel.frame.size.width- 20 - textMarginHorizontal, messageLabelRect.size.height + 10, cell.timestampLabel.frame.size.width, cell.timestampLabel.frame.size.height);
+        
+        // Set frames
+        CGRect cellFrame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, self.view.frame.size.width *3/4, balloonImgRect.size.height + textMarginVertical);
+        
+        cell.frame = cellFrame;
+        cell.backgroundImageBubble.frame = balloonImgRect;
+        cell.timestampLabel.frame = timeLabelRect;
+        cell.messageLabel.frame = messageLabelRect;
         
         return cell;
     }
