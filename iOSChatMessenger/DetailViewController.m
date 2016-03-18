@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "CustomCells/SenderTableViewCell.h"
 #import "ReceiverTableViewCell.h"
+#import "MessageObject.h"
 
 @interface DetailViewController ()
 @property NSMutableArray *objects;
@@ -102,7 +103,11 @@
 - (void)addGroupMessageToView:(NSString *)username message:(NSString *)message sender:(BOOL)isSender
 {
     // Add message to object
-    NSArray *cellObj = [NSArray arrayWithObjects:username, message, (isSender) ? @"YES" : @"NO", nil];
+    MessageObject *cellObj = [MessageObject new];
+    cellObj.messageBody = message;
+    cellObj.usernameSender = username;
+    cellObj.isSender = isSender;
+    
     [self.objects addObject:cellObj];
     [self.tableView reloadData];
 }
@@ -211,16 +216,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *object = self.objects[indexPath.row];
-    NSString *isSender = object[2];
+    MessageObject *object = self.objects[indexPath.row];
     
-    if ([isSender isEqualToString:@"YES"])
+    if (object.isSender)
     {
         NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:@"SenderTableViewCell" owner:self options:0];
         SenderTableViewCell *cell = nibArray[0];
         
         // Set message
-        cell.messageLabel.text = object[1];
+        cell.messageLabel.text = object.messageBody;
         
         // Set date timestamp
         NSDateFormatter *dateFromator = [[NSDateFormatter alloc] init];
@@ -239,10 +243,10 @@
         ReceiverTableViewCell *cell = nibArray[0];
         
         // Set Username
-        cell.username.text = object[0];
+        cell.username.text = object.usernameSender;
         
         // Set message
-        cell.messageLabel.text = object[1];
+        cell.messageLabel.text = object.messageBody;
         
         // Set date timestamp
         NSDateFormatter *dateFromator = [[NSDateFormatter alloc] init];
