@@ -215,6 +215,7 @@ static CGFloat textMarginVertical = 7.5f;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     
+    
     NSArray *object = self.objects[indexPath.row];
     NSString *isSender = object[2];
     
@@ -223,13 +224,20 @@ static CGFloat textMarginVertical = 7.5f;
         NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:@"SenderTableViewCell" owner:self options:0];
         SenderTableViewCell *cell = nibArray[0];
         
+        // Set message
         cell.messageLabel.text = object[1];
         
+        // Set date timestamp
         NSDateFormatter *dateFromator = [[NSDateFormatter alloc] init];
-        [dateFromator for]
+        [dateFromator setDateFormat:@"mm:ss"];
+        NSDate *now = [NSDate date];
+        cell.timestampLabel.text = [dateFromator stringFromDate:now];
         
-        cell.timestampLabel.text = [[[NSDateFormatter alloc] init] stringFromDate:[NSDate date]];
+        // Set check color
         [cell.messageStatusImg setTintColor:[UIColor grayColor]];
+        
+        // Create frames
+        
         
         return cell;
     }
