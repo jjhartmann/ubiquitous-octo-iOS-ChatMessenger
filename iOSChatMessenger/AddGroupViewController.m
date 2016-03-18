@@ -17,11 +17,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.groupTextField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Show keyboard and make text field first responder.
+    [self.groupTextField becomeFirstResponder];
+}
+
+#pragma mark Text Field
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:@selector(chatGroupStringCallback:)])
+    {
+        [self.groupTextField resignFirstResponder];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.delegate chatGroupStringCallback:self.groupTextField.text];
+        }];
+    }
+    
+    return YES;
 }
 
 

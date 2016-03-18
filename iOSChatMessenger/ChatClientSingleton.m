@@ -56,7 +56,7 @@ static ChatClientSingleton *instance = nil;
         CFWriteStreamRef writeStream;
         
         // Create connection to IP address 192.168.1.71
-        CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (CFStringRef) @"192.168.1.71", 12354, &readStream, &writeStream);
+        CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (CFStringRef) @"192.168.1.71", 12543, &readStream, &writeStream);
         self.iStream = (__bridge_transfer NSInputStream *)readStream;
         self.oStream = (__bridge_transfer NSOutputStream * )writeStream;
         
