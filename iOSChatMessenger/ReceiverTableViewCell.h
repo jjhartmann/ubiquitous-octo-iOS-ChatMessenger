@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *username;
 
+- (void)updateLayout:(BOOL)sendStatus;
+
 @end

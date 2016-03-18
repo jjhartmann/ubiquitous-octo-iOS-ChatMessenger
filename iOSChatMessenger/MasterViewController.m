@@ -10,7 +10,6 @@
 #import "DetailViewController.h"
 
 @interface MasterViewController ()
-
 @property NSMutableArray *objects;
 @end
 
