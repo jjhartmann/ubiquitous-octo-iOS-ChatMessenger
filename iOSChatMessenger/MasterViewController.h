@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ChatClientSingleton.h"
+#import "AddGroupViewController.h"
 
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController <ChatClientDelegate>
+@interface MasterViewController : UITableViewController <ChatClientDelegate, AddGroupDelegate>
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) DetailViewController *detailViewController;
 @property (weak, nonatomic) ChatClientSingleton *clientStream;

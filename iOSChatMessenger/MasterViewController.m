@@ -49,10 +49,19 @@
 }
 
 - (void)insertNewObject:(id)sender {
-    [self.objects insertObject:[NSDate date] atIndex:1];
+    // Call segue for adding new group
+    
+    
+}
+
+#pragma mark Add Group
+- (void)chatGroupStringCallback:(NSString *)groupString
+{
+    [self.objects insertObject:groupString atIndex:1];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+
 
 #pragma mark - Segues
 
