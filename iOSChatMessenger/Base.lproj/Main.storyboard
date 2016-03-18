@@ -218,19 +218,17 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
                     <connections>
-                        <segue destination="nIS-PJ-c1y" kind="popoverPresentation" identifier="getNewGroupSegue" id="MFV-jg-qMj">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
+                        <segue destination="nIS-PJ-c1y" kind="presentation" identifier="getNewGroupSegue" id="MFV-jg-qMj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Group View Controller-->
         <scene sceneID="0lY-LK-Vsg">
             <objects>
-                <viewController id="nIS-PJ-c1y" sceneMemberID="viewController">
+                <viewController id="nIS-PJ-c1y" customClass="AddGroupViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7mN-T3-ut5"/>
                         <viewControllerLayoutGuide type="bottom" id="6TT-oc-sCH"/>
@@ -261,6 +259,9 @@
                             <constraint firstItem="Yfc-ER-bzZ" firstAttribute="top" secondItem="7mN-T3-ut5" secondAttribute="bottom" constant="8" id="mTD-NX-8k2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="groupTextField" destination="xBv-9F-16H" id="qCA-xb-Cfs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbr-RR-gbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
