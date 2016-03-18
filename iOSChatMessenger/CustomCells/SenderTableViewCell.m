@@ -8,6 +8,16 @@
 
 #import "SenderTableViewCell.h"
 
+@interface SenderTableViewCell ()
+- (CGSize)getMessageSizeContainer:(NSString *)message;
+
+@end
+
+static CGFloat textMarginHorizontal = 15.0f;
+static CGFloat textMarginVertical = 7.5f;
+static CGFloat messageTextSize = 14.0;
+
+
 @implementation SenderTableViewCell
 
 - (void)awakeFromNib {
