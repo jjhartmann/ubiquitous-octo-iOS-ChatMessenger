@@ -217,10 +217,54 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <connections>
+                        <segue destination="nIS-PJ-c1y" kind="popoverPresentation" identifier="getNewGroupSegue" id="MFV-jg-qMj">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0lY-LK-Vsg">
+            <objects>
+                <viewController id="nIS-PJ-c1y" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7mN-T3-ut5"/>
+                        <viewControllerLayoutGuide type="bottom" id="6TT-oc-sCH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JNe-yj-pmn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Message Group" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfc-ER-bzZ">
+                                <rect key="frame" x="20" y="28" width="565" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message Group" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xBv-9F-16H">
+                                <rect key="frame" x="20" y="57" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xBv-9F-16H" firstAttribute="trailing" secondItem="JNe-yj-pmn" secondAttribute="trailingMargin" id="494-ZG-tUd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Yfc-ER-bzZ" secondAttribute="trailing" constant="-5" id="MWC-Xg-Hbt"/>
+                            <constraint firstItem="xBv-9F-16H" firstAttribute="top" secondItem="Yfc-ER-bzZ" secondAttribute="bottom" constant="8" id="OWV-8m-fx4"/>
+                            <constraint firstItem="xBv-9F-16H" firstAttribute="leading" secondItem="JNe-yj-pmn" secondAttribute="leadingMargin" id="YIt-ql-uPS"/>
+                            <constraint firstItem="Yfc-ER-bzZ" firstAttribute="leading" secondItem="JNe-yj-pmn" secondAttribute="leadingMargin" id="iTh-br-3xA"/>
+                            <constraint firstItem="Yfc-ER-bzZ" firstAttribute="top" secondItem="7mN-T3-ut5" secondAttribute="bottom" constant="8" id="mTD-NX-8k2"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bbr-RR-gbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1364" y="-633"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
@@ -239,6 +283,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tll-UG-LXB"/>
+        <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>
 </document>
