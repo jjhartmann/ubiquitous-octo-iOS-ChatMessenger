@@ -13,7 +13,7 @@
 @interface ChatClientSingleton : NSObject <NSStreamDelegate>
 // Static Methods
 + (id) getClientInstance;
-
++ (id) getClientInstanceWithIP:(NSString *)ipAddress portNumber:(NSString *)portNumber;
 // Instance Vars
 @property (strong, nonatomic) NSInputStream *iStream;
 @property (strong, nonatomic) NSOutputStream *oStream;
@@ -21,6 +21,7 @@
 
 // Instance Methods
 - (id) init;
+- (id) initWithIPandPort:(NSString *)ipAddress portNumber:(NSString *)portNumber;
 - (BOOL)createUserAccount:(NSString *)username;
 - (void)sendStringCommand:(NSString *)command;
 @end

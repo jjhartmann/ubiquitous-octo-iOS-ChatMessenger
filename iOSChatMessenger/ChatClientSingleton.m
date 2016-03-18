@@ -16,6 +16,7 @@
 @property NSInteger oBufferCapacity;
 @property (strong, readwrite, nonatomic) NSMutableData *iBuffer;
 @property (strong, readwrite, nonatomic) NSMutableData *oBuffer;
+- (void)configureSocketStreams:(NSString *)ipAddress portNumber:(NSInteger)port;
 - (void)processInput;
 - (void)parseBuffer;
 
@@ -37,7 +38,16 @@ static ChatClientSingleton *instance = nil;
     return instance;
 }
 
-#pragma mark - 
+/// Static instance to set up client with port and IP settings
++ (id)getClientInstanceWithIP:(NSString *)ipAddress portNumber:(NSString *)portNumber
+{
+    if (!instance)
+    {
+        instance = [[ChatClientSingleton alloc] initWithIPandPort:ipAddress portNumber:portNumber];
+    }
+}
+
+#pragma mark -
 #pragma mark Instance Methods for Client
 /// Initialize and create server connection
 - (id)init
@@ -45,32 +55,52 @@ static ChatClientSingleton *instance = nil;
     self = [super init];
     if (self)
     {
-        // Set capacity of buffers
-        self.iBufferCapacity = 16*1024;
-        self.oBufferCapacity = 16*1024;
-        self.iBuffer = [NSMutableData dataWithCapacity:self.iBufferCapacity];
-        self.oBuffer = [NSMutableData dataWithCapacity:self.oBufferCapacity];
-        
-        // Set up client server connection
-        CFReadStreamRef readStream;
-        CFWriteStreamRef writeStream;
-        
         // Create connection to IP address 192.168.1.71
-        CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (CFStringRef) @"192.168.1.71", 12543, &readStream, &writeStream);
-        self.iStream = (__bridge_transfer NSInputStream *)readStream;
-        self.oStream = (__bridge_transfer NSOutputStream * )writeStream;
-        
-        [self.iStream setDelegate:self];
-        [self.oStream setDelegate:self];
-        
-        [self.iStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [self.oStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        
-        [self.iStream open];
-        [self.oStream open];
+        [self configureSocketStreams:@"192.168.1.71" portNumber:12543];
     }
     
     return self;
+}
+
+- (id)initWithIPandPort:(NSString *)ipAddress portNumber:(NSString *)portNumber
+{
+    NSInteger port = [portNumber integerValue];
+    
+    self = [super init];
+    if (self)
+    {
+        [self configureSocketStreams:ipAddress portNumber:port];
+    }
+    
+    return self;
+}
+
+/// Setup and configure socket streams
+- (void)configureSocketStreams:(NSString *)ipAddress portNumber:(NSInteger)port
+{
+    // Set capacity of buffers
+    self.iBufferCapacity = 16*1024;
+    self.oBufferCapacity = 16*1024;
+    self.iBuffer = [NSMutableData dataWithCapacity:self.iBufferCapacity];
+    self.oBuffer = [NSMutableData dataWithCapacity:self.oBufferCapacity];
+    
+    // Set up client server connection
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
+    
+    // Create connection to IP address 192.168.1.71
+    CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (__bridge CFStringRef) ipAddress, port, &readStream, &writeStream);
+    self.iStream = (__bridge_transfer NSInputStream *)readStream;
+    self.oStream = (__bridge_transfer NSOutputStream * )writeStream;
+    
+    [self.iStream setDelegate:self];
+    [self.oStream setDelegate:self];
+    
+    [self.iStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.oStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    [self.iStream open];
+    [self.oStream open];
 }
 
 /// Create the user accound on server. Returns YES is success
