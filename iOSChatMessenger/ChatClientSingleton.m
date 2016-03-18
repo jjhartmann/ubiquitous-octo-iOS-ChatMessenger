@@ -45,6 +45,8 @@ static ChatClientSingleton *instance = nil;
     {
         instance = [[ChatClientSingleton alloc] initWithIPandPort:ipAddress portNumber:portNumber];
     }
+    
+    return instance;
 }
 
 #pragma mark -
