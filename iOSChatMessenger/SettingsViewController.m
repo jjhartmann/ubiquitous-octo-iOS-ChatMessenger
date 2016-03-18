@@ -17,11 +17,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.ipAddressField.delegate = self;
+    self.portNumberField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.ipAddressField becomeFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.ipAddressField)
+    {
+        [self.ipAddressField resignFirstResponder];
+        [self.portNumberField becomeFirstResponder];
+    }
+    else
+    {
+        [self.portNumberField resignFirstResponder];
+        [self dismissViewControllerAnimated:YES completion:^{
+            // Call delegate class.
+            if ([self.delegate respondsToSelector:@selector(didChangePortandIP:portNumber:)])
+            {
+                [self.delegate didChangePortandIP:self.ipAddressField.text portNumber:self.portNumberField.text];
+            }
+        }];
+    }
+    
+    return YES;
 }
 
 /*

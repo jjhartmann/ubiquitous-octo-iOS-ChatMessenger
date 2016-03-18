@@ -181,10 +181,14 @@
                             <constraint firstItem="nZz-CB-KGa" firstAttribute="top" secondItem="J2b-cY-65r" secondAttribute="bottom" id="qcH-0Q-6Z2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ipAddressField" destination="bwh-3n-e2p" id="acj-Sq-oP6"/>
+                        <outlet property="portNumberField" destination="f0W-2N-WLg" id="p5r-Ua-7CF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nK0-Uu-iLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1566" y="-996"/>
+            <point key="canvasLocation" x="-1566" y="-1006"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="agN-Lh-JBJ">
