@@ -21,9 +21,6 @@
 // recieve
 @end
 
-static CGFloat textMarginHorizontal = 15.0f;
-static CGFloat textMarginVertical = 7.5f;
-
 @implementation DetailViewController
 
 #pragma mark - Managing the detail item
@@ -212,12 +209,8 @@ static CGFloat textMarginVertical = 7.5f;
     return self.objects.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    CGRect messageLabelRect = CGRectZero;
-    CGRect timeLabelRect = CGRectZero;
-    CGRect balloonImgRect = CGRectZero;
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSArray *object = self.objects[indexPath.row];
     NSString *isSender = object[2];
     
@@ -231,39 +224,45 @@ static CGFloat textMarginVertical = 7.5f;
         
         // Set date timestamp
         NSDateFormatter *dateFromator = [[NSDateFormatter alloc] init];
-        [dateFromator setDateFormat:@"mm:ss"];
+        [dateFromator setDateFormat:@"hh:mm:ss"];
         NSDate *now = [NSDate date];
         cell.timestampLabel.text = [dateFromator stringFromDate:now];
         
-        // Set check color
-        [cell.messageStatusImg setTintColor:[UIColor grayColor]];
-        
-        // Create frames
-        balloonImgRect = CGRectMake(self.view.frame.size.width - (MAX(cell.messageLabel.frame.size.width,cell.timestampLabel.frame.size.width+20) + 2*textMarginHorizontal), 0.0f, MAX(cell.messageLabel.frame.size.width,cell.timestampLabel.frame.size.width+20) + 2*textMarginHorizontal, cell.messageLabel.frame.size.height + cell.timestampLabel.frame.size.height + 8 + 2*textMarginVertical);
-        
-        messageLabelRect = CGRectMake(self.view.frame.size.width - (cell.messageLabel.frame.size.width + textMarginHorizontal),  balloonImgRect.origin.y + textMarginVertical, cell.messageLabel.frame.size.width, cell.messageLabel.frame.size.height);
-        
-        timeLabelRect = CGRectMake(self.view.frame.size.width - cell.timestampLabel.frame.size.width- 20 - textMarginHorizontal, messageLabelRect.size.height + 10, cell.timestampLabel.frame.size.width, cell.timestampLabel.frame.size.height);
-        
-        // Set frames
-        CGRect cellFrame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, self.view.frame.size.width *3/4, balloonImgRect.size.height + textMarginVertical);
-        
-        cell.frame = cellFrame;
-        cell.backgroundImageBubble.frame = balloonImgRect;
-        cell.timestampLabel.frame = timeLabelRect;
-        cell.messageLabel.frame = messageLabelRect;
+        // Update Layout
+        [cell updateLayout:YES];
         
         return cell;
     }
     else
     {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        cell.textLabel.text = object[1];
-        cell.detailTextLabel.text = object[0];
+        NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:@"ReceiverTableViewCell" owner:self options:0];
+        ReceiverTableViewCell *cell = nibArray[0];
+        
+        // Set Username
+        cell.username.text = object[0];
+        
+        // Set message
+        cell.messageLabel.text = object[1];
+        
+        // Set date timestamp
+        NSDateFormatter *dateFromator = [[NSDateFormatter alloc] init];
+        [dateFromator setDateFormat:@"hh:mm:ss"];
+        NSDate *now = [NSDate date];
+        cell.timestampLabel.text = [dateFromator stringFromDate:now];
+        
+        // Update Layout
+        [cell updateLayout:YES];
+        
         return cell;
     }
     
     return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Get message object
+    return 100;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
