@@ -50,8 +50,7 @@
 
 - (void)insertNewObject:(id)sender {
     // Call segue for adding new group
-    
-    
+    [self performSegueWithIdentifier:@"getNewGroupSegue" sender:self];
 }
 
 #pragma mark Add Group
@@ -75,6 +74,13 @@
         controller.navigationItem.leftItemsSupplementBackButton = YES;
         controller.clientStream = self.clientStream;
         controller.clientStream.delegate = controller;
+    }
+    
+    // Add group
+    if ([[segue identifier] isEqualToString:@"getNewGroupSegue"])
+    {
+        AddGroupViewController *dest = [segue destinationViewController];
+        dest.delegate = self;
     }
 }
 

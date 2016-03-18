@@ -12,7 +12,7 @@
 
 @interface AddGroupViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *groupTextField;
-
+@property (weak, nonatomic) id <AddGroupDelegate> delegate;
 @end
 
 
