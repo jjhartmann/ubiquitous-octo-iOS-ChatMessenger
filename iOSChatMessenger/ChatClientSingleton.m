@@ -96,38 +96,6 @@ static ChatClientSingleton *instance = nil;
     self.oBuffer = [NSMutableData dataWithCapacity:self.oBufferCapacity];
     self.ipAddress = ipAddress;
     self.portNumber = port;
-    
-//    // Set up client server connection
-//    CFReadStreamRef readStream;
-//    CFWriteStreamRef writeStream;
-//    
-//    // Create connection to IP address 192.168.1.71
-//    CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (__bridge CFStringRef) ipAddress, port, &readStream, &writeStream);
-//    
-//    CFReadStreamSetProperty(readStream,
-//                            kCFStreamPropertyShouldCloseNativeSocket,
-//                            kCFBooleanTrue);
-//    CFWriteStreamSetProperty(writeStream,
-//                             kCFStreamPropertyShouldCloseNativeSocket,
-//                             kCFBooleanTrue);
-//    
-//    self.iStream = (__bridge_transfer NSInputStream *)readStream;
-//    self.oStream = (__bridge_transfer NSOutputStream * )writeStream;
-//    
-//    [self.iStream setDelegate:self];
-//    [self.oStream setDelegate:self];
-//    
-//    CFStreamStatus readStatus;
-//    CFStreamStatus writeStatus;
-//
-//    [self.iStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-//    [self.oStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-//    
-//    [self.iStream open];
-//    [self.oStream open];
-//    
-//    readStatus = CFReadStreamGetStatus(readStream);
-//    writeStatus =  CFWriteStreamGetStatus(writeStream);
 
     CFStreamStatus status = [self configReadWriteStream];
     
