@@ -16,6 +16,7 @@
 - (void)freezeUI;
 - (void)unfreezeUI;
 - (void)createUser;
+- (void)connectToServer;
 @end
 
 @implementation LoginViewController
@@ -36,7 +37,20 @@
     self.ipAdress = @"192.168.1.71";
     self.portNumber = @"25425";
     
-    // TODO: Pass in block to client
+    // Create connection to server
+    [self connectToServer];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/// Connect to the server
+- (void)connectToServer
+{
+    // Create connection to server
     self.clientStream = [ChatClientSingleton
                          getClientInstanceWithIP:self.ipAdress
                          portNumber:self.portNumber
@@ -55,16 +69,7 @@
                          }];
     
     self.clientStream.delegate = self;
-    
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 
 #pragma mark UI Actions
 - (IBAction)loginBtnPressed:(id)sender
