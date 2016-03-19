@@ -169,6 +169,12 @@
 {
     self.ipAdress = ipAddress;
     self.portNumber = portNumber;
+    
+    // Hard Reset Client
+    [self.clientStream reset];
+    
+    // Reconnect with new ip address and port
+    [self connectToServer];
 }
 
 
