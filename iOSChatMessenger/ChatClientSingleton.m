@@ -169,17 +169,7 @@ static ChatClientSingleton *instance = nil;
 - (void)reset
 {
     instance = nil;
-    // Set delgates to nil
-    [self.iStream setDelegate:nil];
-    [self.oStream setDelegate:nil];
-    
-    // Remove the streams from the run loop
-    [self.iStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.oStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    
-    // Close the stream
-    [self.iStream close];
-    [self.oStream close];
+    [self closeCurrentStreams];
 }
 
 /// Close the current streams
