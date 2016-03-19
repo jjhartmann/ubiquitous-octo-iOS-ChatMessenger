@@ -20,6 +20,8 @@
 - (void)processInput;
 - (void)parseBuffer;
 - (BOOL)sendData:(NSData *)data;
+- (CFStreamStatus)configReadWriteStream;
+- (void)closeCurrentStreams;
 
 
 @end
@@ -92,13 +94,64 @@ static ChatClientSingleton *instance = nil;
     self.oBufferCapacity = 16*1024;
     self.iBuffer = [NSMutableData dataWithCapacity:self.iBufferCapacity];
     self.oBuffer = [NSMutableData dataWithCapacity:self.oBufferCapacity];
+    self.ipAddress = ipAddress;
+    self.portNumber = port;
     
+//    // Set up client server connection
+//    CFReadStreamRef readStream;
+//    CFWriteStreamRef writeStream;
+//    
+//    // Create connection to IP address 192.168.1.71
+//    CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (__bridge CFStringRef) ipAddress, port, &readStream, &writeStream);
+//    
+//    CFReadStreamSetProperty(readStream,
+//                            kCFStreamPropertyShouldCloseNativeSocket,
+//                            kCFBooleanTrue);
+//    CFWriteStreamSetProperty(writeStream,
+//                             kCFStreamPropertyShouldCloseNativeSocket,
+//                             kCFBooleanTrue);
+//    
+//    self.iStream = (__bridge_transfer NSInputStream *)readStream;
+//    self.oStream = (__bridge_transfer NSOutputStream * )writeStream;
+//    
+//    [self.iStream setDelegate:self];
+//    [self.oStream setDelegate:self];
+//    
+//    CFStreamStatus readStatus;
+//    CFStreamStatus writeStatus;
+//
+//    [self.iStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//    [self.oStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//    
+//    [self.iStream open];
+//    [self.oStream open];
+//    
+//    readStatus = CFReadStreamGetStatus(readStream);
+//    writeStatus =  CFWriteStreamGetStatus(writeStream);
+
+    CFStreamStatus status = [self configReadWriteStream];
+    
+    // Check for errors, and notify delegate
+    if (status < 1)
+    {
+        NSLog(@"Error occurced when creating the readWrite streams. \n\tStatus: %li", status);
+        statusBlock(NO);
+        return NO;
+    }
+    
+    statusBlock(YES);
+    return YES;
+}
+
+/// Initialize the read stream;
+- (CFStreamStatus)configReadWriteStream
+{
     // Set up client server connection
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
     
     // Create connection to IP address 192.168.1.71
-    CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (__bridge CFStringRef) ipAddress, port, &readStream, &writeStream);
+    CFStreamCreatePairWithSocketToHost(CFAllocatorGetDefault(), (__bridge CFStringRef) self.ipAddress, self.portNumber, &readStream, &writeStream);
     
     CFReadStreamSetProperty(readStream,
                             kCFStreamPropertyShouldCloseNativeSocket,
@@ -113,29 +166,18 @@ static ChatClientSingleton *instance = nil;
     [self.iStream setDelegate:self];
     [self.oStream setDelegate:self];
     
-    CFStreamStatus readStatus;
-    CFStreamStatus writeStatus;
-
     [self.iStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.oStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     
     [self.iStream open];
     [self.oStream open];
     
-    readStatus = CFReadStreamGetStatus(readStream);
-    writeStatus =  CFWriteStreamGetStatus(writeStream);
-
-    // Check for errors, and notify delegate
-    if ((readStatus <= 0) || (writeStatus <= 0))
-    {
-        NSLog(@"Error occurced when creating the readWrite streams. \n\tRStatus: %li \n\tWStatus: %li", readStatus, writeStatus);
-        statusBlock(NO);
-        return NO;
-    }
+    CFStreamStatus readStatus = CFReadStreamGetStatus(readStream);
+    CFStreamStatus writeStatus = CFWriteStreamGetStatus(writeStream);
     
-    statusBlock(YES);
-    return YES;
+    return (readStatus < writeStatus) ? readStatus : writeStatus;
 }
+
 
 /// Create the user accound on server. Returns YES is success
 - (BOOL)createUserAccount:(NSString *)username
@@ -154,6 +196,41 @@ static ChatClientSingleton *instance = nil;
     [self sendData:oData];
 }
 
+#pragma mark private methods
+/// Reset the instannce method
+- (void)reset
+{
+    instance = nil;
+    // Set delgates to nil
+    [self.iStream setDelegate:nil];
+    [self.oStream setDelegate:nil];
+    
+    // Remove the streams from the run loop
+    [self.iStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.oStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    // Close the stream
+    [self.iStream close];
+    [self.oStream close];
+}
+
+/// Close the current streams
+- (void)closeCurrentStreams
+{
+    // Set delgates to nil
+    [self.iStream setDelegate:nil];
+    [self.oStream setDelegate:nil];
+    
+    // Remove the streams from the run loop
+    [self.iStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.oStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    // Close the stream
+    [self.iStream close];
+    [self.oStream close];
+}
+
+
 /// Send data over socket stream
 - (BOOL)sendData:(NSData *)data
 {
@@ -169,6 +246,8 @@ static ChatClientSingleton *instance = nil;
     if (status < NSStreamStatusOpen)
     {
         NSLog(@"Stream is not currently open. Status: %lu", (unsigned long)status);
+        [self closeCurrentStreams];
+        [self configReadWriteStream];
         return NO;
     }
     
@@ -252,6 +331,16 @@ static ChatClientSingleton *instance = nil;
         case NSStreamEventOpenCompleted:
         {
             NSLog(@"StreamHandle: NSStreamEventOpenCompleted");
+            
+            if (self.oStream == aStream)
+            {
+                // Call delegate to initiate send.
+                if ([self.delegate respondsToSelector:@selector(streamDidOpenFor:)])
+                {
+                    [self.delegate streamDidOpenFor:@"oStream"];
+                }
+            }
+            
             break;
         }
         case NSStreamEventHasBytesAvailable: // Read from stream

@@ -34,7 +34,28 @@
     
     // Initial port and ip address
     self.ipAdress = @"192.168.1.71";
-    self.portNumber = @"12543";
+    self.portNumber = @"25425";
+    
+    // TODO: Pass in block to client
+    self.clientStream = [ChatClientSingleton
+                         getClientInstanceWithIP:self.ipAdress
+                         portNumber:self.portNumber
+                         statusCallback:^(BOOL status){
+                             if (status)
+                             {
+                                 self.serverStatus = YES;
+                                 self.errorLabel.hidden = YES;
+                             }
+                             else
+                             {
+                                 self.serverStatus = NO;
+                                 [self.errorLabel setText:@"Error connecting to server"];
+                                 self.errorLabel.hidden = NO;
+                             }
+                         }];
+    
+    self.clientStream.delegate = self;
+    
 }
 
 
@@ -57,39 +78,22 @@
         return;
     }
     
-    // TODO: Pass in block to client
     self.user = user;
-    self.clientStream = [ChatClientSingleton
-                         getClientInstanceWithIP:self.ipAdress
-                         portNumber:self.portNumber
-                         statusCallback:^(BOOL status){
-                             if (status)
-                             {
-                                 self.serverStatus = YES;
-                                 self.errorLabel.hidden = YES;
-                             }
-                             else
-                             {
-                                 self.serverStatus = NO;
-                                 [self.errorLabel setText:@"Error connecting to server"];
-                                 self.errorLabel.hidden = NO;
-                             }
-                         }];
-    
-    self.clientStream.delegate = self;
+    [self freezeUI];
     
     if (self.serverStatus)
-    {
         [self createUser];
-    }
 }
 
 /// Create User account when connected to server
 - (void)createUser
 {
     // Create user if available
-    [self.clientStream createUserAccount:self.user];
-    [self freezeUI];
+    if(![self.clientStream createUserAccount:self.user]) {
+        self.errorLabel.text = @"Error connecting to server. Try again...";
+        self.errorLabel.hidden = NO;
+        [self unfreezeUI];
+    }
 }
 
 /// Dismiss first responder for Text Field
@@ -112,8 +116,9 @@
         // Indeicate the user name is not available
         [self.errorLabel setText:@"Username is unavailable"];
         self.errorLabel.hidden = NO;
-        [self unfreezeUI];
     }
+    
+    [self unfreezeUI];
 }
 
 /// Freeze the UI from user interaction and start activity indicator
@@ -142,6 +147,15 @@
     if ([command[0] isEqualToString:@"addusercb"])
     {
         [self createUserCallback:command[1]];
+    }
+}
+
+/// Gets called when stream has been opened successfully.
+- (void)streamDidOpenFor:(NSString *)streamID
+{
+    if (self.serverStatus && [streamID isEqualToString:@"oStream"])
+    {
+
     }
 }
 
@@ -177,8 +191,8 @@
         // Set up delegate for settings view.
         SettingsViewController *dest = [segue destinationViewController];
         dest.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        dest.ipAddressField.text = self.ipAdress;
-        dest.portNumberField.text = self.portNumber;
+        [dest.ipAddressField setText:self.ipAdress];
+        [dest.portNumberField setText:self.portNumber];
         dest.delegate = self;
     }
     

@@ -20,16 +20,20 @@ typedef void (^StreamStatus) (BOOL);
 @property (strong, nonatomic) NSInputStream *iStream;
 @property (strong, nonatomic) NSOutputStream *oStream;
 @property (weak, nonatomic) id <ChatClientDelegate> delegate;
+@property (strong, nonatomic) NSString *ipAddress;
+@property NSInteger portNumber;
 
 // Instance Methods
 - (id) init;
 - (id) initWithIPandPort:(NSString *)ipAddress portNumber:(NSString *)portNumber statusCallback:(StreamStatus) statusBlock;
 - (BOOL)createUserAccount:(NSString *)username;
 - (void)sendStringCommand:(NSString *)command;
+- (void)reset;
 @end
 
 
 @protocol ChatClientDelegate <NSObject>
 @optional
 - (void)receiveMessageFromServer:(NSString *)message;
+- (void)streamDidOpenFor:(NSString *)streamID;
 @end
