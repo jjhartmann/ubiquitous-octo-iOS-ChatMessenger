@@ -19,6 +19,7 @@
 - (BOOL)configureSocketStreams:(NSString *)ipAddress portNumber:(NSInteger)port statusCallback:(StreamStatus) statusBlock;
 - (void)processInput;
 - (void)parseBuffer;
+- (BOOL)sendData:(NSData *)data;
 
 
 @end
@@ -112,15 +113,18 @@ static ChatClientSingleton *instance = nil;
     [self.iStream setDelegate:self];
     [self.oStream setDelegate:self];
     
+    CFStreamStatus readStatus;
+    CFStreamStatus writeStatus;
+
     [self.iStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.oStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     
     [self.iStream open];
     [self.oStream open];
     
-    CFStreamStatus readStatus = CFReadStreamGetStatus(readStream);
-    CFStreamStatus writeStatus =  CFWriteStreamGetStatus(writeStream);
-    
+    readStatus = CFReadStreamGetStatus(readStream);
+    writeStatus =  CFWriteStreamGetStatus(writeStream);
+
     // Check for errors, and notify delegate
     if ((readStatus <= 0) || (writeStatus <= 0))
     {
@@ -139,17 +143,39 @@ static ChatClientSingleton *instance = nil;
     // Send an iam:<username> request to the server.
     NSString *message = [[NSString alloc] initWithFormat:@"iam:%@", username];
     NSData *oData = [[NSData alloc] initWithData:[message dataUsingEncoding:NSUTF8StringEncoding]];
-    [self.oStream write:[oData bytes] maxLength:[oData length]];
-    
-    return YES;
+
+    return [self sendData:oData];
 }
 
 /// Send string command to the server
 - (void)sendStringCommand:(NSString *)command
 {
     NSData *oData = [[NSData alloc] initWithData:[command dataUsingEncoding:NSUTF8StringEncoding]];
-    [self.oStream write:[oData bytes] maxLength:[oData length]];
+    [self sendData:oData];
 }
+
+/// Send data over socket stream
+- (BOOL)sendData:(NSData *)data
+{
+    NSStreamStatus status = [self.oStream streamStatus];
+    NSError *error = [self.oStream streamError];
+    
+    if (error)
+    {
+        NSLog(@"ERROR: Stream is corrupt with error: %@", error);
+        return NO;
+    }
+    
+    if (status < NSStreamStatusOpen)
+    {
+        NSLog(@"Stream is not currently open. Status: %lu", (unsigned long)status);
+        return NO;
+    }
+    
+    [self.oStream write:[data bytes] maxLength:[data length]];
+    return YES;
+}
+
 
 /// Parse the buffer after revieing message from server
 - (void)parseBuffer
