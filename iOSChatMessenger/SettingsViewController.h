@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *ipAddressField;
 @property (weak, nonatomic) IBOutlet UITextField *portNumberField;
 @property (weak, nonatomic) id <SettingsViewDelegate> delegate;
+@property (strong, nonatomic) NSString *ipAddressText;
+@property (strong, nonatomic) NSString *portNumberText;
 
 @end
 

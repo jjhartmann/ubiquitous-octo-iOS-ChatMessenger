@@ -202,8 +202,8 @@
         // Set up delegate for settings view.
         SettingsViewController *dest = [segue destinationViewController];
         dest.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [dest.ipAddressField setText:self.ipAdress];
-        [dest.portNumberField setText:self.portNumber];
+        dest.ipAddressText = self.ipAdress;
+        dest.portNumberText = self.portNumber;
         dest.delegate = self;
     }
     

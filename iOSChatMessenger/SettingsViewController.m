@@ -18,8 +18,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // Set Text field in ip and port
+    self.ipAddressField.text = self.ipAddressText;
+    self.portNumberField.text = self.portNumberText;
+    
     self.ipAddressField.delegate = self;
     self.portNumberField.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning {
